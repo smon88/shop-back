@@ -1,8 +1,18 @@
-<div
-  class="mx-auto bg-white rounded-md p-6 shadow-md max-w-80 sm:max-w-max sm:pe-32"
+<a
+  [attr.aria-label]="product().name"
+  [routerLink]="[product().productId]"
+  class="transition-transform hover:scale-105 h-full bg-white rounded-md p-6 flex flex-col shadow-md items-center max-w-80"
 >
-  <div class="flex flex-col gap-2 sm:max-w-64">
-    <h2 class="font-bold text-2xl">{{ product().name }}</h2>
+  <div class="relative size-24">
+    <img
+      class="object-contain object-center"
+      [ngSrc]="product().urlImg"
+      alt="Product Image"
+      fill=""
+    />
+  </div>
+  <div class="self-start mt-4 flex flex-col gap-1">
+    <h4 class="font-bold text-lg text-pretty">{{ product().name }}</h4>
     <div class="flex gap-2">
       <div class="flex items-center gap-1">
         <svg
@@ -60,41 +70,13 @@
         {{ product().reviews }} reseñas
       </p>
     </div>
-    <div class="text-2xl font-bold text-gray-900">
-      <p>{{ product().price | currency }}</p>
-      <del class="text-gray-500 text-base">{{
+    <div class="items-baseline font-bold">
+      <p class="text-2xl">{{ product().price | currency }}</p>
+      @if (product().previousPrice) {
+      <del class="text-sm text-gray-500">{{
         product().previousPrice | currency
       }}</del>
-    </div>
-    <div class="p-2">
-      <a
-        [routerLink]="['products', product().productId]"
-        class="inline-flex gap-2 text-gray-500 items-end text-sm hover:underline"
-      >
-        Ver más
-        <svg
-          class="size-4"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 512 512"
-        >
-          <path
-            d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"
-          />
-        </svg>
-      </a>
+      }
     </div>
   </div>
-  <div class="hidden sm:flex absolute -top-24 right-0 xl:right-24">
-    <img
-      class="size-64 object-contain object-center"
-      src="{{ product().urlImg }}"
-      alt="Headphones"
-    />
-    <div
-      class="rounded-full absolute top-6 right-8 bg-gradient-to-tl from-[#06cf86] to-[#0b6142] size-12 inline-flex items-center justify-center"
-    >
-      <p class="font-bold text-white">{{ discount }}%</p>
-    </div>
-  </div>
-</div>
+</a>

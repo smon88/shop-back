@@ -11,6 +11,7 @@ import { CartProduct } from '../shared/models/cart-product';
   templateUrl: './product.component.html',
 })
 export class ProductComponent implements OnInit {
+  showSuccessToast = false;
   route = inject(ActivatedRoute);
   productsService = inject(ProductsService);
   product?: Product;
@@ -28,14 +29,23 @@ export class ProductComponent implements OnInit {
       JSON.parse(localStorage.getItem('cart-products') as string) || [];
 
     const matched = storagedProducts.find(
-      (cartProduct) => cartProduct.product.id == this.product?.id
+      (cartProduct) => cartProduct.productId == this.product?.productId
     );
     if (matched) {
       matched.quantity++;
       localStorage.setItem('cart-products', JSON.stringify(storagedProducts));
     } else {
-      storagedProducts.push({ product: this.product as Product, quantity: 1 });
+      storagedProducts.push({
+        productId: this.product?.productId || 1, quantity: 1,
+        productName: this.product?.name || '',
+        productImg: this.product?.urlImg || '',
+        productPrice: this.product?.price || 0
+      });
       localStorage.setItem('cart-products', JSON.stringify(storagedProducts));
     }
+    this.showSuccessToast = true;
+    setTimeout(()=> {
+      this.showSuccessToast = false;
+    },3000)
   }
 }

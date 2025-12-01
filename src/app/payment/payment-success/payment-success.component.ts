@@ -16,26 +16,29 @@ export class PaymentSuccessComponent implements OnInit {
       localStorage.getItem('cart-products') as string
     );
 
-    const mappedProducts = cartProducts.map(({ quantity, product }) => {
+    const mappedProducts = cartProducts.map(({ quantity, productId }) => {
       return {
-        id: product.id,
+        id: productId,
         quantity,
       };
     });
 
     const total = cartProducts.reduce((acc, current) => {
-      return acc + current.product.price * current.quantity;
+      return acc + current.productPrice * current.quantity;
     }, 0);
 
     localStorage.removeItem('cart-products');
 
-    this.purchaseService.save({ total, products: mappedProducts }).subscribe({
+  /*   this.purchaseService.save({ total, products: mappedProducts }).subscribe({
       next: () => {
         console.log('Purchase saved successfully');
       },
       error: () => {
         // Redirect to Cancel
       },
-    });
+    }); */
+    setTimeout(() => {
+      location.href = "/"
+    }, 8000)
   }
 }

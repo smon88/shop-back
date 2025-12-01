@@ -1,6 +1,6 @@
 <a
   [attr.aria-label]="product().name"
-  [routerLink]="['products', product().id]"
+  [routerLink]="['products', product().productId]"
   class="transition-transform hover:scale-105 h-full bg-white rounded-md p-6 flex flex-col shadow-md items-center max-w-80"
 >
   <div class="relative size-24">
@@ -67,10 +67,10 @@
         </svg>
       </div>
       <p class="border-l border-gray-500 text-gray-500 ps-2 text-sm">
-        {{ product().reviews }} reviews
+        {{ product().reviews }} reseñas
       </p>
     </div>
-    <div class="flex gap-2 items-baseline font-bold">
+    <div class="items-baseline font-bold">
       <p class="text-2xl">{{ product().price | currency }}</p>
       @if (product().previousPrice) {
       <del class="text-sm text-gray-500">{{

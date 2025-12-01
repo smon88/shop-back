@@ -9,7 +9,7 @@ import { CartProduct } from '../../../shared/models/cart-product';
   templateUrl: './cart-product.component.html',
 })
 export class CartProductComponent implements OnInit {
-  product = input.required<Product>();
+  product = input.required<any>();
   quantity = input.required<number>();
   quantitySignal = signal<number>(0);
   quantityUpdatedEvent = output();
@@ -23,7 +23,7 @@ export class CartProductComponent implements OnInit {
       localStorage.getItem('cart-products') as string
     );
     const filteredProducts = storagedProducts.filter(
-      (cartProduct) => cartProduct.product.id !== this.product().id
+      (cartProduct) => cartProduct.productId !== this.product().productId
     );
 
     localStorage.setItem('cart-products', JSON.stringify(filteredProducts));
@@ -38,7 +38,7 @@ export class CartProductComponent implements OnInit {
       localStorage.getItem('cart-products') as string
     );
     const cartProduct = storagedProducts.find(
-      (cartProduct) => cartProduct.product.id === this.product().id
+      (cartProduct) => cartProduct.productId === this.product().productId
     ) as CartProduct;
     cartProduct.quantity++;
 
@@ -56,7 +56,7 @@ export class CartProductComponent implements OnInit {
       localStorage.getItem('cart-products') as string
     );
     const cartProduct = storagedProducts.find(
-      (cartProduct) => cartProduct.product.id === this.product().id
+      (cartProduct) => cartProduct.productId === this.product().productId
     ) as CartProduct;
     cartProduct.quantity--;
 

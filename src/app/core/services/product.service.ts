@@ -8,13 +8,15 @@ import { Product } from '../../shared/models/product';
 })
 export class ProductsService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'https://amazon-back-mfu7.onrender.com/products';
+  private readonly baseUrl = 'http://localhost:3000/products';
 
   getAll(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl);
   }
 
-  getById(id: string): Observable<Product> {
+  getById(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.baseUrl}/${id}`);
   }
+
+  
 }
