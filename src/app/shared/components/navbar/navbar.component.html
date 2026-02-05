@@ -1,32 +1,31 @@
-<header class="bg-white border-b border-gray-200">
-  <nav class="bg-white border-b border-gray-200">
+<header class="glass border-b border-gray-200 dark:border-slate-700 sticky top-0 z-50 transition-all duration-300">
+  <nav>
     <div
       class="max-w-screen-lg flex flex-wrap items-center justify-between mx-auto px-4"
     >
-      <a routerLink="/" aria-label="Logo">
-        <img src="/img/logo-nav.png" class="h-16 p-2" alt="">
+      <a routerLink="/" aria-label="Logo" class="transition-transform duration-300 hover:scale-105">
+        <img src="/img/logo-nav.png" class="h-16 p-2 dark:brightness-0 dark:invert" alt="">
       </a>
-      <div class="flex md:order-2 md:space-x-0 rtl:space-x-reverse">
-        <!-- <button
-          aria-label="Search Button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+      <div class="flex md:order-2 md:space-x-0 rtl:space-x-reverse items-center gap-2">
+        <!-- Dark mode toggle -->
+        <button
+          id="theme-toggle"
+          type="button"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-slate-600 transition-colors duration-300"
+          aria-label="Toggle dark mode"
         >
-          <svg
-            class="size-5"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-          >
-            <path
-              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-            />
+          <svg class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
           </svg>
-        </button> -->
+          <svg class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+          </svg>
+        </button>
         <a
           aria-label="Go to Cart"
           role="button"
           routerLink="/cart"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-primary-500 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-slate-600 transition-all duration-300"
         >
           <svg
             class="w-5 h-5"
@@ -42,7 +41,7 @@
         <button
           data-collapse-toggle="navbar"
           type="button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 dark:text-gray-400 rounded-lg md:hidden hover:bg-gray-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-slate-600 transition-colors duration-300"
           aria-controls="navbar"
           aria-expanded="false"
         >
@@ -69,29 +68,22 @@
         id="navbar"
       >
         <ul
-          class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white"
+          class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 dark:border-slate-700 rounded-lg bg-gray-50 dark:bg-slate-800 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent"
         >
           <li>
             <a
               routerLink="/"
-              class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#06cf86] md:p-0"
+              class="block py-2 px-3 text-gray-900 dark:text-gray-100 rounded hover:bg-gray-100 dark:hover:bg-slate-700 md:hover:bg-transparent md:hover:text-primary-500 md:p-0 transition-colors duration-300"
               >Inicio</a
             >
           </li>
           <li>
             <a
               routerLink="/products"
-              class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#06cf86] md:p-0"
+              class="block py-2 px-3 text-gray-900 dark:text-gray-100 rounded hover:bg-gray-100 dark:hover:bg-slate-700 md:hover:bg-transparent md:hover:text-primary-500 md:p-0 transition-colors duration-300"
               >Productos</a
             >
           </li>
-          <!-- <li>
-            <a
-              routerLink="/gift-cards"
-              class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#06cf86] md:p-0"
-              >Gift Cards</a
-            >
-          </li> -->
         </ul>
       </div>
     </div>

@@ -1,7 +1,7 @@
-<main class="my-16 max-w-screen-lg mx-auto px-6">
-  <section class="flex flex-col md:flex-row gap-4 rounded-lg shadow-md">
-    <article class="grid place-content-center bg-gray-100 p-6">
-      <div class="relative size-64 sm:size-72 lg:size-96">
+<main class="my-16 max-w-screen-lg mx-auto px-6 animate-fade-in">
+  <section class="card flex flex-col md:flex-row gap-4 overflow-hidden">
+    <article class="grid place-content-center bg-gray-100 dark:bg-slate-700 p-6">
+      <div class="relative size-64 sm:size-72 lg:size-96 transition-transform duration-500 hover:scale-105">
         @if (product?.urlImg) {
         <img
           class="object-contain object-center"
@@ -21,7 +21,7 @@
       </div>
     </article>
     <article class="p-6">
-      <h1 class="font-bold text-3xl">{{ product?.name }}</h1>
+      <h1 class="font-bold text-3xl text-gray-900 dark:text-white">{{ product?.name }}</h1>
       <div class="flex gap-2 mt-3">
         <div class="flex items-center gap-1">
           <svg
@@ -80,27 +80,27 @@
         </p>
       </div>
       <div class="mt-5 items-baseline font-bold">
-        <h3 class="text-3xl md:text-5xl">{{ product?.price | currency }}</h3>
+        <h3 class="text-3xl md:text-5xl text-gray-900 dark:text-white">{{ product?.price | currency }}</h3>
         @if (product?.previousPrice) {
-        <h3 class="text-gray-500 text-xl md:text-2xl line-through">
+        <h3 class="text-gray-500 dark:text-gray-400 text-xl md:text-2xl line-through">
           {{ product?.previousPrice | currency }}
         </h3>
         }
       </div>
       <div
-        class="mt-5 text-gray-500 format-strong:text-gray-700 format-li:mb-2 format-p:mb-4"
+        class="mt-5 text-gray-500 dark:text-gray-400 format-strong:text-gray-700 dark:format-strong:text-gray-300 format-li:mb-2 format-p:mb-4"
         [innerHTML]="product?.description"
       ></div>
       <div class="mt-5 flex gap-2">
         <button
           (click)="addToCart()"
-          class="w-full rounded-md focus:ring-4 focus:ring-green-200 bg-gradient-to-tl from-[#06cf86] to-[#0b6142] text-white px-4 py-2 font-bold"
+          class="btn-primary w-full"
         >
           Add To Cart
         </button>
         <button
           type="button"
-          class="py-2 px-4 inline-flex items-center justify-center text-gray-500 hover:text-gray-900 hover:underline bg-gradient-to-tl from-gray-200 to-gray-50 focus:ring-4 focus:ring-gray-100 rounded-md"
+          class="py-2 px-4 inline-flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 bg-gray-100 dark:bg-slate-700 hover:bg-red-50 dark:hover:bg-red-900/20 focus:ring-4 focus:ring-gray-100 dark:focus:ring-slate-600 rounded-lg transition-all duration-300"
         >
           <svg
             class="size-6"
@@ -126,8 +126,8 @@
 </main>
 @if (showSuccessToast) {
 <div
-  id="toast-danger"
-  class="fixed right-5 bottom-5 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow"
+  id="toast-success"
+  class="fixed right-5 bottom-5 flex items-center w-full max-w-xs p-4 text-gray-500 dark:text-gray-300 bg-white dark:bg-slate-800 rounded-lg shadow-lg animate-slide-up border border-gray-100 dark:border-slate-700"
   role="alert"
 >
   <div

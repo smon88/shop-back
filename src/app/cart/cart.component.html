@@ -1,4 +1,4 @@
-<main class="bg-[#f4f2f2] py-8 antialiased md:py-16">
+<main class="py-8 antialiased md:py-16 animate-fade-in">
   <section class="mx-auto max-w-screen-xl px-4 2xl:px-0">
 
 
@@ -17,12 +17,12 @@
               />
             </div>
             <div class="flex flex-col items-center">
-              <h2 class="text-center font-bold text-2xl">Your cart is empty</h2>
-              <p class="text-center text-pretty text-gray-500 max-w-80">
+              <h2 class="text-center font-bold text-2xl text-gray-900 dark:text-white">Your cart is empty</h2>
+              <p class="text-center text-pretty text-gray-500 dark:text-gray-400 max-w-80">
                 Looks like you haven't added any products to your cart yet...
                 <a
                   routerLink="/"
-                  class="inline-flex items-center gap-2 text-sm font-medium text-[#06cf86] underline hover:no-underline"
+                  class="inline-flex items-center gap-2 text-sm font-medium text-primary-500 hover:text-primary-600 dark:text-primary-400 underline hover:no-underline transition-colors duration-300"
                 >
                   Seguir comprando
                   <svg
@@ -60,16 +60,16 @@
 
       <div class="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
         <div
-          class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6"
+          class="card space-y-4 p-4 sm:p-6"
         >
-          <p class="text-xl font-semibold text-gray-900">Resumen del pedido</p>
+          <p class="text-xl font-semibold text-gray-900 dark:text-white">Resumen del pedido</p>
 
           <div class="space-y-4">
             <dl
-              class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2"
+              class="flex items-center justify-between gap-4 border-t border-gray-200 dark:border-slate-700 pt-2"
             >
-              <dt class="text-base font-bold text-gray-900">Total</dt>
-              <dd class="text-base font-bold text-gray-900">
+              <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
+              <dd class="text-base font-bold text-primary-600 dark:text-primary-400">
                 {{ total | currency }}
               </dd>
             </dl>
@@ -77,16 +77,16 @@
 
           <button
             (click)="proceedToCheckout()"
-            class="flex w-full items-center justify-center rounded-lg bg-gradient-to-tl from-[#06cf86] to-[#0b6142] px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-yellow-200"
+            class="btn-primary w-full"
           >
             Continuar
           </button>
 
           <div class="flex items-center justify-center gap-2">
-            <span class="text-sm font-normal text-gray-500"> ó </span>
+            <span class="text-sm font-normal text-gray-500 dark:text-gray-400"> ó </span>
             <a
               routerLink="/"
-              class="inline-flex items-center gap-2 text-sm font-medium text-[#06cf86] underline hover:no-underline"
+              class="inline-flex items-center gap-2 text-sm font-medium text-primary-500 hover:text-primary-600 dark:text-primary-400 underline hover:no-underline transition-colors duration-300"
             >
               Seguir comprando
               <svg
@@ -109,27 +109,27 @@
         </div>
 
         <div
-          class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6"
+          class="card space-y-4 p-4 sm:p-6"
         >
           <form class="space-y-4">
             <div>
               <label
                 for="voucher"
-                class="mb-2 block text-sm font-medium text-gray-900"
+                class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
               >
                 ¿Tienes un cupón o tarjeta de regalo?
               </label>
               <input
                 type="text"
                 id="voucher"
-                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-yellow-200 focus:ring-yellow-600"
+                class="input-field"
                 placeholder=""
                 required
               />
             </div>
             <button
               type="submit"
-              class="flex w-full items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-tl from-[#06cf86] to-[#0b6142] focus:outline-none focus:ring-4 focus:ring-yellow-200"
+              class="btn-primary w-full"
             >
               Aplicar código
             </button>
@@ -142,7 +142,7 @@
 @if (showErrorToast) {
 <div
   id="toast-danger"
-  class="fixed right-5 bottom-5 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow"
+  class="fixed right-5 bottom-5 flex items-center w-full max-w-xs p-4 text-gray-500 dark:text-gray-300 bg-white dark:bg-slate-800 rounded-lg shadow-lg animate-slide-up border border-gray-100 dark:border-slate-700"
   role="alert"
 >
   <div

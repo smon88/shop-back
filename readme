@@ -1,0 +1,58 @@
+Comandos Docker
+
+# === PRODUCCIÓN ===
+
+# Construir la imagen
+npm run docker:build
+
+# Levantar todo (app + PostgreSQL)
+npm run docker:up
+
+# Ver logs de la aplicación
+npm run docker:logs
+
+# Detener todo
+npm run docker:down
+
+# Limpiar (elimina volúmenes e imágenes)
+npm run docker:clean
+
+# === DESARROLLO ===
+
+# Levantar solo PostgreSQL + pgAdmin
+npm run docker:dev:up
+
+# Acceder a pgAdmin: http://localhost:5050
+# Email: admin@zentra.com / Password: admin
+
+# Luego ejecutar la app localmente
+npm run start:dev
+
+# Detener PostgreSQL
+npm run docker:dev:down
+Estructura del Dockerfile
+
+Stage 1: frontend-builder
+├── Instala dependencias de Angular
+└── Construye el frontend para producción
+
+Stage 2: backend-builder  
+├── Instala dependencias de NestJS
+└── Compila TypeScript a JavaScript
+
+Stage 3: production
+├── Imagen mínima (Alpine)
+├── Solo dependencias de producción
+├── Usuario no-root (seguridad)
+├── Health check configurado
+└── Sirve frontend + API en puerto 3000
+Uso Rápido
+
+# 1. Copiar variables de entorno
+cp .env.docker .env
+
+# 2. Construir y levantar
+docker-compose up -d --build
+
+# 3. Acceder a la aplicación
+# http://localhost:3000

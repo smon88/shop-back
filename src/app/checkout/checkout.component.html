@@ -1,15 +1,15 @@
-<main class="bg-[#f4f2f2] py-8 antialiased md:py-3">
+<main class="py-8 antialiased md:py-3 animate-fade-in">
   <section class="mx-auto max-w-screen-xl px-4 2xl:px-0">
     <div class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
       <!-- COLUMNA IZQUIERDA: FORMULARIO -->
       <div class="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
         <form class="space-y-8">
           <!-- Información de contacto -->
-          <div class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
-            <h3 class="text-lg font-semibold text-gray-900">
+          <div class="card space-y-4 p-4 sm:p-6">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
               Información de contacto
             </h3>
-            <p class="text-sm text-gray-500">
+            <p class="text-sm text-gray-500 dark:text-gray-400">
               Usa un correo y válido para recibir la confirmación del pedido.
             </p>
 
@@ -17,7 +17,7 @@
               <div class="md:col-span-2">
                 <label
                   for="contactEmail"
-                  class="mb-2 block text-sm font-medium text-gray-900"
+                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Correo electrónico*
                 </label>
@@ -26,19 +26,17 @@
                   id="contactEmail"
                   name="contactEmail"
                   [(ngModel)]="contact.email"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                  class="input-field"
                   placeholder="correo@correo.com"
                   required
                 />
               </div>
-
-             
             </div>
           </div>
 
           <!-- Dirección de facturación -->
-          <div class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
-            <h3 class="text-lg font-semibold text-gray-900">
+          <div class="card space-y-4 p-4 sm:p-6">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
               Dirección de facturación
             </h3>
 
@@ -46,7 +44,7 @@
               <div>
                 <label
                   for="billingFirstName"
-                  class="mb-2 block text-sm font-medium text-gray-900"
+                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Nombre*
                 </label>
@@ -55,7 +53,7 @@
                   id="billingFirstName"
                   name="billingFirstName"
                   [(ngModel)]="billing.firstName"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                  class="input-field"
                   required
                 />
               </div>
@@ -63,7 +61,7 @@
               <div>
                 <label
                   for="billingLastName"
-                  class="mb-2 block text-sm font-medium text-gray-900"
+                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Apellido*
                 </label>
@@ -72,7 +70,7 @@
                   id="billingLastName"
                   name="billingLastName"
                   [(ngModel)]="billing.lastName"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                  class="input-field"
                   required
                 />
               </div>
@@ -80,7 +78,7 @@
               <div>
                 <label
                   for="billingDocument"
-                  class="mb-2 block text-sm font-medium text-gray-900"
+                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Documento de identidad*
                 </label>
@@ -89,7 +87,7 @@
                   id="billingDocument"
                   name="billingDocument"
                   [(ngModel)]="billing.document"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                  class="input-field"
                   required
                 />
               </div>
@@ -97,7 +95,7 @@
               <div>
                 <label
                   for="billingPhone"
-                  class="mb-2 block text-sm font-medium text-gray-900"
+                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Teléfono*
                 </label>
@@ -106,7 +104,7 @@
                   id="billingPhone"
                   name="billingPhone"
                   [(ngModel)]="billing.phone"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                  class="input-field"
                   required
                 />
               </div>
@@ -114,7 +112,7 @@
               <div>
                 <label
                   for="billingCountry"
-                  class="mb-2 block text-sm font-medium text-gray-900"
+                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
                   País*
                 </label>
@@ -123,7 +121,7 @@
                   id="billingCountry"
                   name="billingCountry"
                   [(ngModel)]="billing.country"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                  class="input-field"
                   placeholder="Colombia"
                   required
                 />
@@ -132,7 +130,7 @@
               <div>
                 <label
                   for="billingCity"
-                  class="mb-2 block text-sm font-medium text-gray-900"
+                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Ciudad*
                 </label>
@@ -141,7 +139,7 @@
                   id="billingCity"
                   name="billingCity"
                   [(ngModel)]="billing.city"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                  class="input-field"
                   required
                 />
               </div>
@@ -149,7 +147,7 @@
               <div class="md:col-span-2">
                 <label
                   for="billingAddress"
-                  class="mb-2 block text-sm font-medium text-gray-900"
+                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Dirección*
                 </label>
@@ -158,7 +156,7 @@
                   id="billingAddress"
                   name="billingAddress"
                   [(ngModel)]="billing.address"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                  class="input-field"
                   placeholder="Calle 00 # 00 - 00"
                   required
                 />
@@ -167,7 +165,7 @@
               <div class="md:col-span-2">
                 <label
                   for="billingEmail"
-                  class="mb-2 block text-sm font-medium text-gray-900"
+                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Email de facturación*
                 </label>
@@ -176,7 +174,7 @@
                   id="billingEmail"
                   name="billingEmail"
                   [(ngModel)]="billing.email"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                  class="input-field"
                   required
                 />
               </div>
@@ -184,18 +182,18 @@
           </div>
 
           <!-- Checkbox: Enviar a una dirección diferente -->
-          <div class="space-y-3 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
+          <div class="card space-y-3 p-4 sm:p-6">
             <div class="flex items-center gap-3">
               <input
                 id="shipToDifferentAddress"
                 type="checkbox"
                 name="shipToDifferentAddress"
                 [(ngModel)]="shipToDifferentAddress"
-                class="h-4 w-4 rounded border-gray-300 text-[#06cf86] focus:ring-[#06cf86]"
+                class="h-4 w-4 rounded border-gray-300 dark:border-slate-600 text-primary-500 focus:ring-primary-500 dark:bg-slate-700"
               />
               <label
                 for="shipToDifferentAddress"
-                class="text-sm font-medium text-gray-900"
+                class="text-sm font-medium text-gray-900 dark:text-white"
               >
                 Enviar a una dirección diferente
               </label>
@@ -203,7 +201,7 @@
 
             @if (shipToDifferentAddress) {
               <div class="mt-4 space-y-4">
-                <h3 class="text-lg font-semibold text-gray-900">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                   Dirección de envío*
                 </h3>
 
@@ -211,7 +209,7 @@
                   <div>
                     <label
                       for="shippingFirstName"
-                      class="mb-2 block text-sm font-medium text-gray-900"
+                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Nombre*
                     </label>
@@ -220,7 +218,7 @@
                       id="shippingFirstName"
                       name="shippingFirstName"
                       [(ngModel)]="shipping.firstName"
-                      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                      class="input-field"
                       required
                     />
                   </div>
@@ -228,7 +226,7 @@
                   <div>
                     <label
                       for="shippingLastName"
-                      class="mb-2 block text-sm font-medium text-gray-900"
+                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Apellido*
                     </label>
@@ -237,7 +235,7 @@
                       id="shippingLastName"
                       name="shippingLastName"
                       [(ngModel)]="shipping.lastName"
-                      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                      class="input-field"
                       required
                     />
                   </div>
@@ -245,7 +243,7 @@
                   <div>
                     <label
                       for="shippingDocument"
-                      class="mb-2 block text-sm font-medium text-gray-900"
+                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Documento de identidad*
                     </label>
@@ -254,7 +252,7 @@
                       id="shippingDocument"
                       name="shippingDocument"
                       [(ngModel)]="shipping.document"
-                      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                      class="input-field"
                       required
                     />
                   </div>
@@ -262,7 +260,7 @@
                   <div>
                     <label
                       for="shippingPhone"
-                      class="mb-2 block text-sm font-medium text-gray-900"
+                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Teléfono*
                     </label>
@@ -271,7 +269,7 @@
                       id="shippingPhone"
                       name="shippingPhone"
                       [(ngModel)]="shipping.phone"
-                      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                      class="input-field"
                       required
                     />
                   </div>
@@ -279,7 +277,7 @@
                   <div>
                     <label
                       for="shippingCountry"
-                      class="mb-2 block text-sm font-medium text-gray-900"
+                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
                       País*
                     </label>
@@ -288,7 +286,7 @@
                       id="shippingCountry"
                       name="shippingCountry"
                       [(ngModel)]="shipping.country"
-                      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                      class="input-field"
                       placeholder="Colombia"
                       required
                     />
@@ -297,7 +295,7 @@
                   <div>
                     <label
                       for="shippingCity"
-                      class="mb-2 block text-sm font-medium text-gray-900"
+                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Ciudad*
                     </label>
@@ -306,7 +304,7 @@
                       id="shippingCity"
                       name="shippingCity"
                       [(ngModel)]="shipping.city"
-                      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                      class="input-field"
                       required
                     />
                   </div>
@@ -314,7 +312,7 @@
                   <div class="md:col-span-2">
                     <label
                       for="shippingAddress"
-                      class="mb-2 block text-sm font-medium text-gray-900"
+                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Dirección*
                     </label>
@@ -323,7 +321,7 @@
                       id="shippingAddress"
                       name="shippingAddress"
                       [(ngModel)]="shipping.address"
-                      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                      class="input-field"
                       placeholder="Calle 00 # 00 - 00"
                       required
                     />
@@ -332,7 +330,7 @@
                   <div class="md:col-span-2">
                     <label
                       for="shippingEmail"
-                      class="mb-2 block text-sm font-medium text-gray-900"
+                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Email de envío*
                     </label>
@@ -341,7 +339,7 @@
                       id="shippingEmail"
                       name="shippingEmail"
                       [(ngModel)]="shipping.email"
-                      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86]"
+                      class="input-field"
                       required
                     />
                   </div>
@@ -354,17 +352,15 @@
 
       <!-- COLUMNA DERECHA: RESUMEN -->
       <div class="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
-        <div
-          class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6"
-        >
-          <p class="text-xl font-semibold text-gray-900">Resumen del pedido</p>
+        <div class="card space-y-4 p-4 sm:p-6">
+          <p class="text-xl font-semibold text-gray-900 dark:text-white">Resumen del pedido</p>
 
           <div class="space-y-4">
             <dl
-              class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2"
+              class="flex items-center justify-between gap-4 border-t border-gray-200 dark:border-slate-700 pt-2"
             >
-              <dt class="text-base font-bold text-gray-900">Total</dt>
-              <dd class="text-base font-bold text-gray-900">
+              <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
+              <dd class="text-base font-bold text-primary-600 dark:text-primary-400">
                 {{ total | currency }}
               </dd>
             </dl>
@@ -372,16 +368,16 @@
 
           <button
             (click)="onProceedToCheckout()"
-            class="flex w-full items-center justify-center rounded-lg bg-gradient-to-tl from-[#06cf86] to-[#0b6142] px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-[#06cf86]"
+            class="btn-primary w-full"
           >
             Ir a Pagar
           </button>
 
           <div class="flex items-center justify-center gap-2">
-            <span class="text-sm font-normal text-gray-500"> ó </span>
+            <span class="text-sm font-normal text-gray-500 dark:text-gray-400"> ó </span>
             <a
               routerLink="/"
-              class="inline-flex items-center gap-2 text-sm font-medium text-[#06cf86] underline hover:no-underline"
+              class="inline-flex items-center gap-2 text-sm font-medium text-primary-500 hover:text-primary-600 dark:text-primary-400 underline hover:no-underline transition-colors duration-300"
             >
               Seguir comprando
               <svg
@@ -402,8 +398,6 @@
             </a>
           </div>
         </div>
-
-        
       </div>
     </div>
   </section>
@@ -412,11 +406,11 @@
 @if (showErrorToast) {
   <div
     id="toast-danger"
-    class="fixed right-5 bottom-5 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow"
+    class="fixed right-5 bottom-5 flex items-center w-full max-w-xs p-4 text-gray-500 dark:text-gray-300 bg-white dark:bg-slate-800 rounded-lg shadow-lg animate-slide-up border border-gray-100 dark:border-slate-700"
     role="alert"
   >
     <div
-      class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg"
+      class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 dark:bg-red-900/30 rounded-lg"
     >
       <svg
         class="w-5 h-5"
@@ -437,7 +431,7 @@
     <button
       (click)="showErrorToast = false"
       type="button"
-      class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8"
+      class="ms-auto -mx-1.5 -my-1.5 bg-white dark:bg-slate-800 text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-lg focus:ring-2 focus:ring-gray-300 dark:focus:ring-slate-600 p-1.5 hover:bg-gray-100 dark:hover:bg-slate-700 inline-flex items-center justify-center h-8 w-8 transition-colors duration-200"
       aria-label="Close"
     >
       <span class="sr-only">Close</span>

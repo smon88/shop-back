@@ -1,9 +1,9 @@
 <a
   [attr.aria-label]="product().name"
   [routerLink]="['products', product().productId]"
-  class="transition-transform hover:scale-105 h-full bg-white rounded-md p-6 flex flex-col shadow-md items-center max-w-80"
+  class="card card-hover h-full p-6 flex flex-col items-center max-w-80 group"
 >
-  <div class="relative size-24">
+  <div class="relative size-24 transition-transform duration-300 group-hover:scale-110">
     <img
       class="object-contain object-center"
       [ngSrc]="product().urlImg"
@@ -12,11 +12,11 @@
     />
   </div>
   <div class="self-start mt-4 flex flex-col gap-1">
-    <h4 class="font-bold text-lg text-pretty">{{ product().name }}</h4>
+    <h4 class="font-bold text-lg text-pretty text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">{{ product().name }}</h4>
     <div class="flex gap-2">
       <div class="flex items-center gap-1">
         <svg
-          class="size-4 text-yellow-300"
+          class="size-4 text-yellow-400"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 576 512"
@@ -26,7 +26,7 @@
           />
         </svg>
         <svg
-          class="size-4 text-yellow-300"
+          class="size-4 text-yellow-400"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 576 512"
@@ -36,7 +36,7 @@
           />
         </svg>
         <svg
-          class="size-4 text-yellow-300"
+          class="size-4 text-yellow-400"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 576 512"
@@ -46,7 +46,7 @@
           />
         </svg>
         <svg
-          class="size-4 text-yellow-300"
+          class="size-4 text-yellow-400"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 576 512"
@@ -56,7 +56,7 @@
           />
         </svg>
         <svg
-          class="size-4 text-yellow-300"
+          class="size-4 text-yellow-400"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 576 512"
@@ -66,14 +66,14 @@
           />
         </svg>
       </div>
-      <p class="border-l border-gray-500 text-gray-500 ps-2 text-sm">
+      <p class="border-l border-gray-300 dark:border-slate-600 text-gray-500 dark:text-gray-400 ps-2 text-sm">
         {{ product().reviews }} reseñas
       </p>
     </div>
     <div class="items-baseline font-bold">
-      <p class="text-2xl">{{ product().price | currency }}</p>
+      <p class="text-2xl text-gray-900 dark:text-white">{{ product().price | currency }}</p>
       @if (product().previousPrice) {
-      <del class="text-sm text-gray-500">{{
+      <del class="text-sm text-gray-500 dark:text-gray-400">{{
         product().previousPrice | currency
       }}</del>
       }
