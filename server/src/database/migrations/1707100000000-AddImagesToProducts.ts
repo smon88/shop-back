@@ -1,17 +1,22 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class AddImagesToProducts1707100000000 implements MigrationInterface {
-  name = 'AddImagesToProducts1707100000000';
+export class CreateProductsTable1707000000000 implements MigrationInterface {
+  name = 'CreateProductsTable1707000000000';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(
-      `ALTER TABLE "products" ADD "images" text`,
-    );
+    await queryRunner.query(`
+      CREATE TABLE "products" (
+        "id" SERIAL PRIMARY KEY,
+        "name" varchar NOT NULL,
+        "price" numeric,
+        "created_at" TIMESTAMP DEFAULT now()
+      )
+    `);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(
-      `ALTER TABLE "products" DROP COLUMN "images"`,
-    );
+    await queryRunner.query(`
+      DROP TABLE "products"
+    `);
   }
 }
