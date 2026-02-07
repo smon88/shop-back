@@ -25,7 +25,9 @@ let SeedService = SeedService_1 = class SeedService {
         this.productRepository = productRepository;
     }
     async onModuleInit() {
-        await this.seedProducts();
+        if (process.env.NODE_ENV !== 'production') {
+            await this.seedProducts();
+        }
     }
     async seedProducts() {
         const count = await this.productRepository.count();
