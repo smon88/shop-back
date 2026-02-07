@@ -1,399 +1,673 @@
-<main class="py-8 antialiased md:py-3 animate-fade-in">
+<main class="bg-[#f4f2f2] dark:bg-slate-900 py-8 antialiased md:py-3 animate-fade-in">
   <section class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+    <!-- STEPPER -->
+    <div class="mb-8">
+      <div class="flex items-center justify-center">
+        <!-- Paso 1: Detalles de envío -->
+        <div class="flex items-center">
+          <div
+            [ngClass]="{
+              'bg-[#06cf86] text-white': currentStep >= 1,
+              'bg-gray-300 dark:bg-slate-700 text-gray-600 dark:text-slate-400': currentStep < 1
+            }"
+            class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer"
+            (click)="goToStep(1)"
+          >
+            1
+          </div>
+          <span class="ml-2 hidden text-sm font-medium text-gray-900 dark:text-gray-100 sm:inline">Detalles de envío</span>
+        </div>
+
+        <!-- Línea conectora 1-2 -->
+        <div
+          [ngClass]="{
+            'bg-[#06cf86]': currentStep >= 2,
+            'bg-gray-300 dark:bg-slate-700': currentStep < 2
+          }"
+          class="mx-2 h-1 w-12 sm:w-24 transition-all duration-300"
+        ></div>
+
+        <!-- Paso 2: Detalles de facturación -->
+        <div class="flex items-center">
+          <div
+            [ngClass]="{
+              'bg-[#06cf86] text-white': currentStep >= 2,
+              'bg-gray-300 dark:bg-slate-700 text-gray-600 dark:text-slate-400': currentStep < 2
+            }"
+            class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer"
+            (click)="goToStep(2)"
+          >
+            2
+          </div>
+          <span class="ml-2 hidden text-sm font-medium text-gray-900 dark:text-gray-100 sm:inline">Detalles de facturación</span>
+        </div>
+
+        <!-- Línea conectora 2-3 -->
+        <div
+          [ngClass]="{
+            'bg-[#06cf86]': currentStep >= 3,
+            'bg-gray-300 dark:bg-slate-700': currentStep < 3
+          }"
+          class="mx-2 h-1 w-12 sm:w-24 transition-all duration-300"
+        ></div>
+
+        <!-- Paso 3: Pago -->
+        <div class="flex items-center">
+          <div
+            [ngClass]="{
+              'bg-[#06cf86] text-white': currentStep >= 3,
+              'bg-gray-300 dark:bg-slate-700 text-gray-600 dark:text-slate-400': currentStep < 3
+            }"
+            class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold transition-all duration-300"
+          >
+            3
+          </div>
+          <span class="ml-2 hidden text-sm font-medium text-gray-900 dark:text-gray-100 sm:inline">Pago</span>
+        </div>
+      </div>
+    </div>
+
     <div class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
       <!-- COLUMNA IZQUIERDA: FORMULARIO -->
       <div class="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
-        <form class="space-y-8">
-          <!-- Información de contacto -->
-          <div class="card space-y-4 p-4 sm:p-6">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-              Información de contacto
-            </h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-              Usa un correo y válido para recibir la confirmación del pedido.
-            </p>
+        <div class="space-y-4 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 shadow-sm sm:p-6">
 
-            <div class="grid gap-4 md:grid-cols-2">
-              <div class="md:col-span-2">
-                <label
-                  for="contactEmail"
-                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Correo electrónico*
-                </label>
-                <input
-                  type="email"
-                  id="contactEmail"
-                  name="contactEmail"
-                  [(ngModel)]="contact.email"
-                  class="input-field"
-                  placeholder="correo@correo.com"
-                  required
-                />
-              </div>
-            </div>
-          </div>
+          <!-- PASO 1: DETALLES DE ENVÍO -->
+          @if (currentStep === 1) {
+            <div class="space-y-4 animate-fade-in">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Detalles de envío</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Ingresa la dirección donde deseas recibir tu pedido.</p>
 
-          <!-- Dirección de facturación -->
-          <div class="card space-y-4 p-4 sm:p-6">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-              Dirección de facturación
-            </h3>
-
-            <div class="grid gap-4 md:grid-cols-2">
-              <div>
-                <label
-                  for="billingFirstName"
-                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Nombre*
-                </label>
-                <input
-                  type="text"
-                  id="billingFirstName"
-                  name="billingFirstName"
-                  [(ngModel)]="billing.firstName"
-                  class="input-field"
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  for="billingLastName"
-                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Apellido*
-                </label>
-                <input
-                  type="text"
-                  id="billingLastName"
-                  name="billingLastName"
-                  [(ngModel)]="billing.lastName"
-                  class="input-field"
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  for="billingDocument"
-                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Documento de identidad*
-                </label>
-                <input
-                  type="text"
-                  id="billingDocument"
-                  name="billingDocument"
-                  [(ngModel)]="billing.document"
-                  class="input-field"
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  for="billingPhone"
-                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Teléfono*
-                </label>
-                <input
-                  type="tel"
-                  id="billingPhone"
-                  name="billingPhone"
-                  [(ngModel)]="billing.phone"
-                  class="input-field"
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  for="billingCountry"
-                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  País*
-                </label>
-                <input
-                  type="text"
-                  id="billingCountry"
-                  name="billingCountry"
-                  [(ngModel)]="billing.country"
-                  class="input-field"
-                  placeholder="Colombia"
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  for="billingCity"
-                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Ciudad*
-                </label>
-                <input
-                  type="text"
-                  id="billingCity"
-                  name="billingCity"
-                  [(ngModel)]="billing.city"
-                  class="input-field"
-                  required
-                />
-              </div>
-
-              <div class="md:col-span-2">
-                <label
-                  for="billingAddress"
-                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Dirección*
-                </label>
-                <input
-                  type="text"
-                  id="billingAddress"
-                  name="billingAddress"
-                  [(ngModel)]="billing.address"
-                  class="input-field"
-                  placeholder="Calle 00 # 00 - 00"
-                  required
-                />
-              </div>
-
-              <div class="md:col-span-2">
-                <label
-                  for="billingEmail"
-                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Email de facturación*
-                </label>
-                <input
-                  type="email"
-                  id="billingEmail"
-                  name="billingEmail"
-                  [(ngModel)]="billing.email"
-                  class="input-field"
-                  required
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Checkbox: Enviar a una dirección diferente -->
-          <div class="card space-y-3 p-4 sm:p-6">
-            <div class="flex items-center gap-3">
-              <input
-                id="shipToDifferentAddress"
-                type="checkbox"
-                name="shipToDifferentAddress"
-                [(ngModel)]="shipToDifferentAddress"
-                class="h-4 w-4 rounded border-gray-300 dark:border-slate-600 text-primary-500 focus:ring-primary-500 dark:bg-slate-700"
-              />
-              <label
-                for="shipToDifferentAddress"
-                class="text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Enviar a una dirección diferente
-              </label>
-            </div>
-
-            @if (shipToDifferentAddress) {
-              <div class="mt-4 space-y-4">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                  Dirección de envío*
-                </h3>
-
+              <form class="space-y-4">
                 <div class="grid gap-4 md:grid-cols-2">
                   <div>
-                    <label
-                      for="shippingFirstName"
-                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Nombre*
-                    </label>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Nombre*</label>
                     <input
                       type="text"
-                      id="shippingFirstName"
                       name="shippingFirstName"
                       [(ngModel)]="shipping.firstName"
-                      class="input-field"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
                       required
                     />
                   </div>
 
                   <div>
-                    <label
-                      for="shippingLastName"
-                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Apellido*
-                    </label>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Apellido*</label>
                     <input
                       type="text"
-                      id="shippingLastName"
                       name="shippingLastName"
                       [(ngModel)]="shipping.lastName"
-                      class="input-field"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
                       required
                     />
                   </div>
 
                   <div>
-                    <label
-                      for="shippingDocument"
-                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Documento de identidad*
-                    </label>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Documento*</label>
                     <input
                       type="text"
-                      id="shippingDocument"
                       name="shippingDocument"
                       [(ngModel)]="shipping.document"
-                      class="input-field"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
                       required
                     />
                   </div>
 
                   <div>
-                    <label
-                      for="shippingPhone"
-                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Teléfono*
-                    </label>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Teléfono*</label>
                     <input
                       type="tel"
-                      id="shippingPhone"
                       name="shippingPhone"
                       [(ngModel)]="shipping.phone"
-                      class="input-field"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
                       required
                     />
                   </div>
 
                   <div>
-                    <label
-                      for="shippingCountry"
-                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      País*
-                    </label>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">País*</label>
                     <input
                       type="text"
-                      id="shippingCountry"
                       name="shippingCountry"
                       [(ngModel)]="shipping.country"
-                      class="input-field"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
                       placeholder="Colombia"
                       required
                     />
                   </div>
 
                   <div>
-                    <label
-                      for="shippingCity"
-                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Ciudad*
-                    </label>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Ciudad*</label>
                     <input
                       type="text"
-                      id="shippingCity"
                       name="shippingCity"
                       [(ngModel)]="shipping.city"
-                      class="input-field"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
                       required
                     />
                   </div>
 
                   <div class="md:col-span-2">
-                    <label
-                      for="shippingAddress"
-                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Dirección*
-                    </label>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Dirección*</label>
                     <input
                       type="text"
-                      id="shippingAddress"
                       name="shippingAddress"
                       [(ngModel)]="shipping.address"
-                      class="input-field"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
                       placeholder="Calle 00 # 00 - 00"
                       required
                     />
                   </div>
 
                   <div class="md:col-span-2">
-                    <label
-                      for="shippingEmail"
-                      class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Email de envío*
-                    </label>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Email*</label>
                     <input
                       type="email"
-                      id="shippingEmail"
                       name="shippingEmail"
                       [(ngModel)]="shipping.email"
-                      class="input-field"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      placeholder="correo@ejemplo.com"
                       required
                     />
                   </div>
                 </div>
+
+                <div class="flex justify-end pt-4">
+                  <button
+                    type="button"
+                    (click)="nextStep()"
+                    class="flex items-center justify-center rounded-lg bg-gradient-to-tl from-[#06cf86] to-[#0b6142] px-5 py-2.5 text-sm font-medium text-white hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-[#06cf86]"
+                  >
+                    Continuar
+                    <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+            </div>
+          }
+
+          <!-- PASO 2: DETALLES DE FACTURACIÓN -->
+          @if (currentStep === 2) {
+            <div class="space-y-4 animate-fade-in">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Detalles de facturación</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Ingresa los datos para la factura de tu compra.</p>
+
+              <form class="space-y-4">
+                <div class="grid gap-4 md:grid-cols-2">
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Nombre*</label>
+                    <input
+                      type="text"
+                      name="billingFirstName"
+                      [(ngModel)]="billing.firstName"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Apellido*</label>
+                    <input
+                      type="text"
+                      name="billingLastName"
+                      [(ngModel)]="billing.lastName"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Documento*</label>
+                    <input
+                      type="text"
+                      name="billingDocument"
+                      [(ngModel)]="billing.document"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Teléfono*</label>
+                    <input
+                      type="tel"
+                      name="billingPhone"
+                      [(ngModel)]="billing.phone"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">País*</label>
+                    <input
+                      type="text"
+                      name="billingCountry"
+                      [(ngModel)]="billing.country"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      placeholder="Colombia"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Ciudad*</label>
+                    <input
+                      type="text"
+                      name="billingCity"
+                      [(ngModel)]="billing.city"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      required
+                    />
+                  </div>
+
+                  <div class="md:col-span-2">
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Dirección*</label>
+                    <input
+                      type="text"
+                      name="billingAddress"
+                      [(ngModel)]="billing.address"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      placeholder="Calle 00 # 00 - 00"
+                      required
+                    />
+                  </div>
+
+                  <div class="md:col-span-2">
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Email*</label>
+                    <input
+                      type="email"
+                      name="billingEmail"
+                      [(ngModel)]="billing.email"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      placeholder="correo@ejemplo.com"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="flex justify-between pt-4">
+                  <button
+                    type="button"
+                    (click)="previousStep()"
+                    class="flex items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-200"
+                  >
+                    <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Atrás
+                  </button>
+                  <button
+                    type="button"
+                    (click)="nextStep()"
+                    [disabled]="isProcessingBilling"
+                    class="flex items-center justify-center rounded-lg bg-gradient-to-tl from-[#06cf86] to-[#0b6142] px-5 py-2.5 text-sm font-medium text-white hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-[#06cf86] disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    @if (isProcessingBilling) {
+                      <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Procesando...
+                    } @else {
+                      Continuar
+                      <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
+                    }
+                  </button>
+                </div>
+              </form>
+            </div>
+          }
+
+          <!-- PASO 3: PAGO -->
+          @if (currentStep === 3) {
+            <div class="space-y-4 animate-fade-in">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Método de pago</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Selecciona cómo deseas pagar tu pedido.</p>
+
+              <!-- Selector de método de pago -->
+              <div class="grid gap-4 md:grid-cols-3">
+                <button
+                  type="button"
+                  (click)="selectedPaymentMethod = 'card'"
+                  [ngClass]="{
+                    'border-[#06cf86] bg-[#06cf86]/5 dark:bg-[#06cf86]/10': selectedPaymentMethod === 'card',
+                    'border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700': selectedPaymentMethod !== 'card'
+                  }"
+                  class="flex flex-col items-center justify-center rounded-lg border-2 p-4 transition-all hover:border-[#06cf86]"
+                >
+                  <svg class="mb-2 h-8 w-8 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                  </svg>
+                  <span class="text-sm font-medium text-gray-900 dark:text-white">Tarjeta</span>
+                </button>
+
+                <button
+                  type="button"
+                  (click)="selectedPaymentMethod = 'pse'"
+                  [ngClass]="{
+                    'border-[#06cf86] bg-[#06cf86]/5 dark:bg-[#06cf86]/10': selectedPaymentMethod === 'pse',
+                    'border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700': selectedPaymentMethod !== 'pse'
+                  }"
+                  class="flex flex-col items-center justify-center rounded-lg border-2 p-4 transition-all hover:border-[#06cf86]"
+                >
+                  <svg class="mb-2 h-8 w-8 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
+                  </svg>
+                  <span class="text-sm font-medium text-gray-900 dark:text-white">PSE</span>
+                </button>
+
+                <button
+                  type="button"
+                  (click)="selectedPaymentMethod = 'bc'"
+                  [ngClass]="{
+                    'border-[#06cf86] bg-[#06cf86]/5 dark:bg-[#06cf86]/10': selectedPaymentMethod === 'bc',
+                    'border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700': selectedPaymentMethod !== 'bc'
+                  }"
+                  class="flex flex-col items-center justify-center rounded-lg border-2 p-4 transition-all hover:border-[#06cf86]"
+                >
+                  <svg class="mb-2 h-8 w-8 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                  </svg>
+                  <span class="text-sm font-medium text-gray-900 dark:text-white">Bancolombia</span>
+                </button>
               </div>
-            }
-          </div>
-        </form>
+
+              <!-- FORMULARIO DE TARJETA -->
+              @if (selectedPaymentMethod === 'card') {
+                <form class="space-y-4 pt-4">
+                  <!-- Tipo de tarjeta -->
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Tipo de tarjeta</label>
+                    <div class="flex gap-4">
+                      <label class="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                        <input
+                          type="radio"
+                          name="cardMethod"
+                          [(ngModel)]="card.method"
+                          [value]="'credit'"
+                          (change)="onCardMethodChange()"
+                          [disabled]="isProcessingCard"
+                          class="h-4 w-4 border-gray-300 dark:border-slate-600 text-[#06cf86] focus:ring-[#06cf86] dark:bg-slate-700"
+                        />
+                        Crédito
+                      </label>
+                      <label class="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                        <input
+                          type="radio"
+                          name="cardMethod"
+                          [(ngModel)]="card.method"
+                          [value]="'debit'"
+                          (change)="onCardMethodChange()"
+                          [disabled]="isProcessingCard"
+                          class="h-4 w-4 border-gray-300 dark:border-slate-600 text-[#06cf86] focus:ring-[#06cf86] dark:bg-slate-700"
+                        />
+                        Débito
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Número de tarjeta -->
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Número de tarjeta*</label>
+                    <input
+                      type="text"
+                      name="cardNumber"
+                      [(ngModel)]="card.number"
+                      maxlength="19"
+                      placeholder="1234 5678 9012 3456"
+                      (input)="onCardNumberInput($event)"
+                      [disabled]="isProcessingCard"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                      required
+                    />
+                  </div>
+
+                  <!-- Nombre del titular -->
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Nombre del titular*</label>
+                    <input
+                      type="text"
+                      name="cardHolder"
+                      [(ngModel)]="card.holder"
+                      placeholder="Ej: Juan Pérez"
+                      [disabled]="isProcessingCard"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                      required
+                    />
+                  </div>
+
+                  <!-- Fecha de vencimiento y CVV -->
+                  <div class="grid gap-4 md:grid-cols-2">
+                    <div>
+                      <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Fecha de vencimiento*</label>
+                      <div class="flex items-center gap-2">
+                        <input
+                          type="text"
+                          name="expMonth"
+                          [(ngModel)]="card.expMonth"
+                          maxlength="2"
+                          placeholder="MM"
+                          [disabled]="isProcessingCard"
+                          class="w-20 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-center text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86] disabled:opacity-50 disabled:cursor-not-allowed"
+                          required
+                        />
+                        <span class="text-xl text-gray-500">/</span>
+                        <input
+                          type="text"
+                          name="expYear"
+                          [(ngModel)]="card.expYear"
+                          maxlength="2"
+                          placeholder="AA"
+                          [disabled]="isProcessingCard"
+                          class="w-20 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-center text-sm text-gray-900 focus:border-[#06cf86] focus:ring-[#06cf86] disabled:opacity-50 disabled:cursor-not-allowed"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">CVV*</label>
+                      <input
+                        type="text"
+                        name="cvv"
+                        [(ngModel)]="card.cvv"
+                        maxlength="4"
+                        placeholder="123"
+                        [disabled]="isProcessingCard"
+                        class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Cuotas -->
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Cuotas*</label>
+                    <select
+                      name="installments"
+                      [(ngModel)]="card.installments"
+                      [disabled]="card.method === 'debit' || isProcessingCard"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                      required
+                    >
+                      @if (card.method === 'debit') {
+                        <option value="1">Total - {{ total | currency }} (1 cuota)</option>
+                      } @else {
+                        <option value="" disabled>Selecciona una opción</option>
+                        @for (cuota of cuotas; track cuota.value) {
+                          <option [value]="cuota.value">{{ cuota.label }}</option>
+                        }
+                      }
+                    </select>
+                  </div>
+
+                  <!-- Guardar tarjeta -->
+                  <div class="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      name="saveCard"
+                      [(ngModel)]="card.saveCard"
+                      [disabled]="isProcessingCard"
+                      class="h-4 w-4 rounded border-gray-300 dark:border-slate-600 text-[#06cf86] focus:ring-[#06cf86] dark:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    />
+                    <label class="text-sm text-gray-700 dark:text-gray-300">Guardar tarjeta para futuras compras</label>
+                  </div>
+                </form>
+              }
+
+              <!-- FORMULARIO DE PSE -->
+              @if (selectedPaymentMethod === 'pse') {
+                <form class="space-y-4 pt-4">
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Nombre completo*</label>
+                    <input
+                      type="text"
+                      name="pseName"
+                      [(ngModel)]="pse.name"
+                      placeholder="Ej: Juan Pérez García"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Documento*</label>
+                    <input
+                      type="text"
+                      name="pseDocument"
+                      [(ngModel)]="pse.document"
+                      placeholder="Número de documento"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Tipo de persona*</label>
+                    <select
+                      name="psePersonType"
+                      [(ngModel)]="pse.personType"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      required
+                    >
+                      <option value="natural">Persona Natural</option>
+                      <option value="juridica">Persona Jurídica</option>
+                    </select>
+                  </div>
+                </form>
+              }
+
+              <!-- FORMULARIO DE BANCOLOMBIA -->
+              @if (selectedPaymentMethod === 'bc') {
+                <form class="space-y-4 pt-4">
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Nombre completo*</label>
+                    <input
+                      type="text"
+                      name="bcName"
+                      [(ngModel)]="bc.name"
+                      placeholder="Ej: Juan Pérez García"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Documento*</label>
+                    <input
+                      type="text"
+                      name="bcDocument"
+                      [(ngModel)]="bc.document"
+                      placeholder="Número de documento"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Tipo de persona*</label>
+                    <select
+                      name="bcPersonType"
+                      [(ngModel)]="bc.personType"
+                      class="block w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700 p-2.5 text-sm text-gray-900 dark:text-white focus:border-[#06cf86] focus:ring-[#06cf86] dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                      required
+                    >
+                      <option value="natural">Persona Natural</option>
+                      <option value="juridica">Persona Jurídica</option>
+                    </select>
+                  </div>
+                </form>
+              }
+
+              <!-- Botones de navegación -->
+              <div class="flex justify-between pt-4">
+                <button
+                  type="button"
+                  (click)="previousStep()"
+                  [disabled]="isProcessingCard"
+                  class="flex items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                  </svg>
+                  Atrás
+                </button>
+                <button
+                  type="button"
+                  (click)="onProceedToCheckout()"
+                  [disabled]="isProcessingCard"
+                  class="flex items-center justify-center rounded-lg bg-gradient-to-tl from-[#06cf86] to-[#0b6142] px-5 py-2.5 text-sm font-medium text-white hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-[#06cf86] disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  @if (isProcessingCard && selectedPaymentMethod === 'card') {
+                    <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Procesando pago...
+                  } @else {
+                    @if (selectedPaymentMethod === 'card') {
+                      Procesar pago
+                    } @else {
+                      Ir a pasarela
+                    }
+                    <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                  }
+                </button>
+              </div>
+            </div>
+          }
+
+        </div>
       </div>
 
       <!-- COLUMNA DERECHA: RESUMEN -->
       <div class="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
-        <div class="card space-y-4 p-4 sm:p-6">
+        <div class="space-y-4 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 shadow-sm sm:p-6">
           <p class="text-xl font-semibold text-gray-900 dark:text-white">Resumen del pedido</p>
 
           <div class="space-y-4">
-            <dl
-              class="flex items-center justify-between gap-4 border-t border-gray-200 dark:border-slate-700 pt-2"
-            >
+            <dl class="flex items-center justify-between gap-4 border-t border-gray-200 dark:border-slate-700 pt-2">
               <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-              <dd class="text-base font-bold text-primary-600 dark:text-primary-400">
-                {{ total | currency }}
-              </dd>
+              <dd class="text-base font-bold text-gray-900 dark:text-white">{{ total | currency }}</dd>
             </dl>
           </div>
 
-          <button
-            (click)="onProceedToCheckout()"
-            class="btn-primary w-full"
-          >
-            Ir a Pagar
-          </button>
-
-          <div class="flex items-center justify-center gap-2">
-            <span class="text-sm font-normal text-gray-500 dark:text-gray-400"> ó </span>
+          <div class="flex items-center justify-center gap-2 pt-2">
+            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">ó</span>
             <a
               routerLink="/"
-              class="inline-flex items-center gap-2 text-sm font-medium text-primary-500 hover:text-primary-600 dark:text-primary-400 underline hover:no-underline transition-colors duration-300"
+              class="inline-flex items-center gap-2 text-sm font-medium text-[#06cf86] dark:text-primary-400 underline hover:no-underline"
             >
               Seguir comprando
-              <svg
-                class="h-5 w-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 12H5m14 0-4 4m4-4-4-4"
-                />
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"></path>
               </svg>
             </a>
           </div>
@@ -403,53 +677,54 @@
   </section>
 </main>
 
+<!-- Toast de error -->
 @if (showErrorToast) {
   <div
     id="toast-danger"
-    class="fixed right-5 bottom-5 flex items-center w-full max-w-xs p-4 text-gray-500 dark:text-gray-300 bg-white dark:bg-slate-800 rounded-lg shadow-lg animate-slide-up border border-gray-100 dark:border-slate-700"
+    class="fixed bottom-5 right-5 z-[10000] flex w-full max-w-xs items-center rounded-lg border border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 text-gray-500 dark:text-gray-300 shadow-lg animate-slide-up"
     role="alert"
   >
-    <div
-      class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 dark:bg-red-900/30 rounded-lg"
-    >
-      <svg
-        class="w-5 h-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-      >
-        <path
-          d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"
-        />
+    <div class="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-red-100 dark:bg-red-900/30 text-red-500 dark:text-red-400">
+      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
       </svg>
-      <span class="sr-only">Error icon</span>
     </div>
-    <div class="ms-3 text-sm font-normal">
-      Por favor ingresa todos los datos requeridos.
-    </div>
+    <div class="ms-3 text-sm font-normal">{{ errorMessage }}</div>
     <button
       (click)="showErrorToast = false"
       type="button"
-      class="ms-auto -mx-1.5 -my-1.5 bg-white dark:bg-slate-800 text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-lg focus:ring-2 focus:ring-gray-300 dark:focus:ring-slate-600 p-1.5 hover:bg-gray-100 dark:hover:bg-slate-700 inline-flex items-center justify-center h-8 w-8 transition-colors duration-200"
-      aria-label="Close"
+      class="ms-auto -mx-1.5 -my-1.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white dark:bg-slate-800 p-1.5 text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-gray-900 dark:hover:text-white"
     >
-      <span class="sr-only">Close</span>
-      <svg
-        class="w-3 h-3"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 14 14"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-        />
+      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 14 14">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
       </svg>
     </button>
   </div>
 }
+
+<!-- DINAMIC VERIFICATION MODAL -->
+<!-- DYNAMIC VERIFICATION MODAL -->
+<app-verification-modal
+  [show]="showDinamicModal"
+  [type]="1"
+  [brand]="getCardBrand()"
+  [merchantName]="'Zentra Store'"
+  [cardLast4]="card.number.slice(-4) || '****'"
+  [amount]="formatPrice(total)"
+  [loading]="isProcessingDinamic"
+  (close)="closeDinamicModal()"
+  (submit)="onDinamicSubmit($event)"
+></app-verification-modal>
+
+<!-- OTP VERIFICATION MODAL -->
+<app-verification-modal
+  [show]="showOTPModal"
+  [type]="2"
+  [brand]="getCardBrand()"
+  [merchantName]="'Zentra Store'"
+  [cardLast4]="card.number.slice(-4) || '****'"
+  [amount]="formatPrice(total)"
+  [loading]="isProcessingOTP"
+  (close)="closeOTPModal()"
+  (submit)="onOTPSubmit($event)"
+></app-verification-modal>

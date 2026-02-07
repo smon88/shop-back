@@ -1,32 +1,62 @@
-<!-- Pantalla completa -->
-<div class="min-h-screen w-full flex items-center justify-center text-slate-100">
+<!-- Pantalla completa de loading -->
+<div class="min-h-screen w-full flex items-center justify-center bg-[#f4f2f2] dark:bg-slate-900">
   <div class="flex flex-col items-center gap-6">
 
-    <!-- Círculo de glow de fondo -->
+    <!-- Logo con animación -->
     <div class="relative">
-      <div class="absolute -inset-6 rounded-full bg-[#06cf86]/20 blur-2xl animate-pulse"></div>
+      <!-- Círculo de glow de fondo animado -->
+      <div class="absolute -inset-8 rounded-full bg-[#06cf86]/20 blur-3xl animate-pulse"></div>
 
-      <!-- Spinner principal -->
+      <!-- Contenedor del logo con spinner -->
       <div class="relative">
-        <div
-          class="h-20 w-20 rounded-full border-4 border-slate-700 border-t-[#06cf86] animate-spin"
-        ></div>
+        <!-- Spinner circular externo -->
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="h-32 w-32 rounded-full border-4 border-gray-200 dark:border-slate-700 border-t-[#06cf86] animate-spin"></div>
+        </div>
 
-        <!-- Punto interno -->
-        <div class="absolute inset-3 rounded-full bg-slate-900 flex items-center justify-center">
-          <div class="h-3 w-3 rounded-full bg-[#06cf86] animate-ping"></div>
+        <!-- Logo -->
+        <div class="relative z-10 p-6 bg-white dark:bg-slate-800 rounded-full shadow-2xl">
+          <img
+            src="/img/logo-nav.png"
+            alt="Logo"
+            class="h-20 w-20 object-contain dark:brightness-0 dark:invert animate-pulse"
+          />
         </div>
       </div>
     </div>
 
-    <!-- Texto -->
-    <div class="flex flex-col items-center gap-1">
-      <p class="text-sm tracking-[0.25em] uppercase text-slate-400">
+    <!-- Texto de carga -->
+    <div class="flex flex-col items-center gap-2">
+      <p class="text-lg font-semibold text-gray-900 dark:text-white animate-pulse">
         Cargando...
       </p>
-      <p class="text-xs text-slate-500">
-        Esto podría tomar algunos segundos...
+      <p class="text-sm text-gray-500 dark:text-slate-400">
+        Por favor espera un momento
       </p>
     </div>
+
+    <!-- Barra de progreso infinita -->
+    <div class="w-48 h-1 bg-gray-200 dark:bg-slate-700 rounded-full overflow-hidden">
+      <div class="h-full bg-[#06cf86] rounded-full animate-progress"></div>
+    </div>
   </div>
-</div>  
+</div>
+
+<style>
+@keyframes progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-progress {
+  animation: progress 1.5s ease-in-out infinite;
+  width: 50%;
+}
+</style>

@@ -3,8 +3,10 @@ import {
   IsNumber,
   IsOptional,
   IsBoolean,
+  IsArray,
   Min,
   MaxLength,
+  ArrayMaxSize,
 } from 'class-validator';
 
 export class CreateProductDto {
@@ -32,6 +34,12 @@ export class CreateProductDto {
   @IsString()
   @MaxLength(500)
   urlImg: string;
+
+  @IsArray()
+  @IsString({ each: true })
+  @ArrayMaxSize(4)
+  @IsOptional()
+  images?: string[];
 
   @IsBoolean()
   @IsOptional()

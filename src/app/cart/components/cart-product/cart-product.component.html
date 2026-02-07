@@ -1,25 +1,25 @@
-<div class="card p-4 md:p-6 transition-all duration-300 hover:shadow-lg">
+<div class="card p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-lg">
   <div
-    class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0"
+    class="space-y-3 sm:space-y-4 md:flex md:items-center md:justify-between md:gap-4 lg:gap-6 md:space-y-0"
   >
-    <a class="shrink-0 md:order-1">
-      <img class="h-20 w-20 object-contain transition-transform duration-300 hover:scale-110" src="{{ product().productImg }}" alt="imac image" />
+    <a class="shrink-0 md:order-1 flex justify-center">
+      <img class="h-16 w-16 sm:h-20 sm:w-20 object-contain transition-transform duration-300 hover:scale-110" [src]="product().productImg | imageUrl" [alt]="product().productName" />
     </a>
 
     <label [htmlFor]="'counter-input-' + product().productId" class="sr-only"
-      >Choose quantity:</label
+      >Elegir cantidad:</label
     >
-    <div class="flex items-center justify-between md:order-3 md:justify-end">
+    <div class="flex items-center justify-between md:order-3 md:justify-end gap-4">
       <div class="flex items-center">
         <button
           (click)="decrementQuantity()"
           type="button"
           [id]="'decrement-button-' + product().productId"
           [attr.data-input-counter-decrement]="'counter-input-' + product().productId"
-          class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-800 transition-colors duration-200"
+          class="inline-flex h-6 w-6 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-800 transition-colors duration-200"
         >
           <svg
-            class="h-3 w-3 text-gray-900 dark:text-white"
+            class="h-2.5 w-2.5 sm:h-3 sm:w-3 text-gray-900 dark:text-white"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -38,7 +38,7 @@
           type="text"
           [id]="'counter-input-' + product().productId"
           data-input-counter
-          class="w-12 shrink-0 border-0 bg-transparent text-center text-sm font-bold text-gray-900 dark:text-white focus:outline-none focus:ring-0"
+          class="w-10 sm:w-12 shrink-0 border-0 bg-transparent text-center text-sm font-bold text-gray-900 dark:text-white focus:outline-none focus:ring-0"
           placeholder=""
           [value]="quantitySignal()"
           [disabled]="true"
@@ -48,10 +48,10 @@
           (click)="incrementQuantity()"
           [id]="'increment-button-' + product().productId"
           [attr.data-input-counter-increment]="'counter-input-' + product().productId"
-          class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-800 transition-colors duration-200"
+          class="inline-flex h-6 w-6 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-lg border border-gray-300 dark:border-slate-600 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-800 transition-colors duration-200"
         >
           <svg
-            class="h-3 w-3 text-gray-900 dark:text-white"
+            class="h-2.5 w-2.5 sm:h-3 sm:w-3 text-gray-900 dark:text-white"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -67,25 +67,25 @@
           </svg>
         </button>
       </div>
-      <div class="text-end md:order-4 md:w-32">
-        <p class="text-lg font-bold text-primary-600 dark:text-primary-400">
+      <div class="text-end md:order-4 md:w-28 lg:w-32">
+        <p class="text-base sm:text-lg font-bold text-primary-600 dark:text-primary-400">
           {{ product().price * quantitySignal() | currency }}
         </p>
       </div>
     </div>
 
-    <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-      <a class="text-base font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">{{
+    <div class="w-full min-w-0 flex-1 space-y-2 sm:space-y-3 md:order-2 md:max-w-md">
+      <a class="text-sm sm:text-base font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300 line-clamp-2">{{
         product().productName
       }}</a>
 
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 sm:gap-4 flex-wrap">
         <button
           type="button"
-          class="inline-flex items-center text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300"
+          class="inline-flex items-center text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300"
         >
           <svg
-            class="me-1.5 h-5 w-5"
+            class="me-1 sm:me-1.5 h-4 w-4 sm:h-5 sm:w-5"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -101,16 +101,16 @@
               d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
             />
           </svg>
-          Añadir a favoritos
+          <span class="hidden sm:inline">Añadir a </span>favoritos
         </button>
 
         <button
           type="button"
           (click)="removeProduct()"
-          class="inline-flex items-center text-sm font-medium text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-300"
+          class="inline-flex items-center text-xs sm:text-sm font-medium text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-300"
         >
           <svg
-            class="me-1.5 h-5 w-5"
+            class="me-1 sm:me-1.5 h-4 w-4 sm:h-5 sm:w-5"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"

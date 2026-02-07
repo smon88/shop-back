@@ -7,8 +7,11 @@ const app_module_1 = require("./app.module");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const configService = app.get(config_1.ConfigService);
+    const isDevelopment = process.env.NODE_ENV !== 'production';
     app.enableCors({
-        origin: configService.get('FRONTEND_URL', 'http://localhost:4200'),
+        origin: isDevelopment
+            ? '*'
+            : configService.get('FRONTEND_URL', 'http://localhost:4200'),
         credentials: true,
     });
     app.useGlobalPipes(new common_1.ValidationPipe({
@@ -20,9 +23,10 @@ async function bootstrap() {
         },
     }));
     const port = configService.get('PORT', 3000);
-    await app.listen(port);
-    console.log(`🚀 Server running on http://localhost:${port}`);
-    console.log(`📦 API available at http://localhost:${port}/api`);
+    const host = configService.get('HOST', '0.0.0.0');
+    await app.listen(port, host);
+    console.log(`🚀 Server running on http://${host}:${port}`);
+    console.log(`📦 API available at http://${host}:${port}/api`);
 }
-bootstrap();
+void bootstrap();
 //# sourceMappingURL=main.js.map

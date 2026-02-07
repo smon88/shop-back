@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(gh repo create:*)",
-      "Bash(winget install:*)"
+      "Bash(winget install:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run start:*)",
+      "Bash(ng generate:*)",
+      "Bash(npx ng build:*)"
     ]
   }
 }

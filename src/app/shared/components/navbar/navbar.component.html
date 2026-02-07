@@ -1,34 +1,71 @@
-<header class="glass border-b border-gray-200 dark:border-slate-700 sticky top-0 z-50 transition-all duration-300">
-  <nav>
-    <div
-      class="max-w-screen-lg flex flex-wrap items-center justify-between mx-auto px-4"
-    >
-      <a routerLink="/" aria-label="Logo" class="transition-transform duration-300 hover:scale-105">
-        <img src="/img/logo-nav.png" class="h-16 p-2 dark:brightness-0 dark:invert" alt="">
+<header
+  [class.shadow-lg]="isScrolled()"
+  class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-gray-200 dark:border-slate-700 sticky top-0 z-50 transition-all duration-300"
+>
+  <nav class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <!-- Logo -->
+      <a
+        routerLink="/"
+        aria-label="Logo"
+        class="flex-shrink-0 transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#06cf86] rounded-lg"
+        (click)="closeMenu()"
+      >
+        <img
+          src="/img/logo-nav.png"
+          class="h-12 lg:h-14 dark:brightness-0 dark:invert"
+          alt="Logo"
+        >
       </a>
-      <div class="flex md:order-2 md:space-x-0 rtl:space-x-reverse items-center gap-2">
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
+        <a
+          routerLink="/"
+          routerLinkActive="!text-[#06cf86] !font-semibold"
+          [routerLinkActiveOptions]="{exact: true}"
+          class="nav-link px-4 py-2 text-sm lg:text-base font-medium text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-[#06cf86] dark:hover:text-[#06cf86] transition-all duration-300 relative group"
+        >
+          Inicio
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#06cf86] group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a
+          routerLink="/products"
+          routerLinkActive="!text-[#06cf86] !font-semibold"
+          class="nav-link px-4 py-2 text-sm lg:text-base font-medium text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-[#06cf86] dark:hover:text-[#06cf86] transition-all duration-300 relative group"
+        >
+          Productos
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#06cf86] group-hover:w-full transition-all duration-300"></span>
+        </a>
+      </div>
+
+      <!-- Right Icons -->
+      <div class="flex items-center space-x-2">
         <!-- Dark mode toggle -->
         <button
           id="theme-toggle"
           type="button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-slate-600 transition-colors duration-300"
+          class="p-2.5 text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-slate-600 transition-all duration-300 group"
           aria-label="Toggle dark mode"
         >
-          <svg class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+          <svg class="w-5 h-5 hidden dark:block transition-transform group-hover:rotate-180 duration-500" fill="currentColor" viewBox="0 0 20 20">
             <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
           </svg>
-          <svg class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+          <svg class="w-5 h-5 block dark:hidden transition-transform group-hover:rotate-[20deg] duration-300" fill="currentColor" viewBox="0 0 20 20">
             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
           </svg>
         </button>
+
+        <!-- Cart button with badge -->
         <a
           aria-label="Go to Cart"
           role="button"
           routerLink="/cart"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-primary-500 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-slate-600 transition-all duration-300"
+          class="relative p-2.5 text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-[#06cf86] dark:hover:text-[#06cf86] focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-slate-600 transition-all duration-300 group"
+          (click)="closeMenu()"
         >
           <svg
-            class="w-5 h-5"
+            class="w-5 h-5 transition-transform group-hover:scale-110 duration-300"
             fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 576 512"
@@ -37,55 +74,100 @@
               d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
             />
           </svg>
+          @if (cartItemsCount() > 0) {
+            <span class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#06cf86] text-[10px] font-bold text-white ring-2 ring-white dark:ring-slate-900 animate-pulse">
+              {{ cartItemsCount() > 9 ? '9+' : cartItemsCount() }}
+            </span>
+          }
         </a>
+
+        <!-- Mobile menu button -->
         <button
-          data-collapse-toggle="navbar"
+          (click)="toggleMenu()"
           type="button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 dark:text-gray-400 rounded-lg md:hidden hover:bg-gray-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-slate-600 transition-colors duration-300"
-          aria-controls="navbar"
-          aria-expanded="false"
+          class="md:hidden p-2.5 text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-slate-600 transition-all duration-300"
+          [attr.aria-expanded]="isMenuOpen()"
+          aria-label="Toggle menu"
         >
-          <span class="sr-only">Open main menu</span>
-          <svg
-            class="w-5 h-5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 17 14"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M1 1h15M1 7h15M1 13h15"
-            />
-          </svg>
+          <!-- Hamburger icon -->
+          <div class="w-5 h-5 flex flex-col justify-center items-center space-y-1">
+            <span
+              [class.rotate-45]="isMenuOpen()"
+              [class.translate-y-2]="isMenuOpen()"
+              class="block w-5 h-0.5 bg-current transition-all duration-300"
+            ></span>
+            <span
+              [class.opacity-0]="isMenuOpen()"
+              class="block w-5 h-0.5 bg-current transition-all duration-300"
+            ></span>
+            <span
+              [class.-rotate-45]="isMenuOpen()"
+              [class.-translate-y-2]="isMenuOpen()"
+              class="block w-5 h-0.5 bg-current transition-all duration-300"
+            ></span>
+          </div>
         </button>
-      </div>
-      <div
-        class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 p-4 md:p-0"
-        id="navbar"
-      >
-        <ul
-          class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 dark:border-slate-700 rounded-lg bg-gray-50 dark:bg-slate-800 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent"
-        >
-          <li>
-            <a
-              routerLink="/"
-              class="block py-2 px-3 text-gray-900 dark:text-gray-100 rounded hover:bg-gray-100 dark:hover:bg-slate-700 md:hover:bg-transparent md:hover:text-primary-500 md:p-0 transition-colors duration-300"
-              >Inicio</a
-            >
-          </li>
-          <li>
-            <a
-              routerLink="/products"
-              class="block py-2 px-3 text-gray-900 dark:text-gray-100 rounded hover:bg-gray-100 dark:hover:bg-slate-700 md:hover:bg-transparent md:hover:text-primary-500 md:p-0 transition-colors duration-300"
-              >Productos</a
-            >
-          </li>
-        </ul>
       </div>
     </div>
   </nav>
+
+  <!-- Mobile menu overlay -->
+  @if (isMenuOpen()) {
+    <div
+      class="fixed inset-0 top-16 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+      (click)="closeMenu()"
+      style="animation: fadeIn 0.2s ease-out"
+    ></div>
+  }
+
+  <!-- Mobile menu -->
+  <div
+    [class.translate-x-0]="isMenuOpen()"
+    [class.translate-x-full]="!isMenuOpen()"
+    class="fixed right-0 top-16 h-[calc(100vh-4rem)] w-64 bg-white dark:bg-slate-800 shadow-2xl z-50 md:hidden transition-transform duration-300 ease-in-out"
+  >
+    <nav class="flex flex-col h-full p-6 space-y-2">
+      <a
+        routerLink="/"
+        routerLinkActive="!bg-[#06cf86]/10 !text-[#06cf86] !font-semibold !border-l-4 !border-[#06cf86]"
+        [routerLinkActiveOptions]="{exact: true}"
+        (click)="closeMenu()"
+        class="flex items-center space-x-3 px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-[#06cf86] dark:hover:text-[#06cf86] transition-all duration-300"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+        <span>Inicio</span>
+      </a>
+      <a
+        routerLink="/products"
+        routerLinkActive="!bg-[#06cf86]/10 !text-[#06cf86] !font-semibold !border-l-4 !border-[#06cf86]"
+        (click)="closeMenu()"
+        class="flex items-center space-x-3 px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-[#06cf86] dark:hover:text-[#06cf86] transition-all duration-300"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+        </svg>
+        <span>Productos</span>
+      </a>
+      <a
+        routerLink="/cart"
+        routerLinkActive="!bg-[#06cf86]/10 !text-[#06cf86] !font-semibold !border-l-4 !border-[#06cf86]"
+        (click)="closeMenu()"
+        class="flex items-center justify-between px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-[#06cf86] dark:hover:text-[#06cf86] transition-all duration-300"
+      >
+        <div class="flex items-center space-x-3">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 576 512">
+            <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
+          </svg>
+          <span>Carrito</span>
+        </div>
+        @if (cartItemsCount() > 0) {
+          <span class="flex h-6 w-6 items-center justify-center rounded-full bg-[#06cf86] text-xs font-bold text-white">
+            {{ cartItemsCount() > 9 ? '9+' : cartItemsCount() }}
+          </span>
+        }
+      </a>
+    </nav>
+  </div>
 </header>

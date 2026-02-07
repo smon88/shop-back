@@ -1,13 +1,15 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../core/services/product.service';
 import { Product } from '../shared/models/product';
-import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
+import { CurrencyPipe, NgOptimizedImage, CommonModule } from '@angular/common';
 import { CartProduct } from '../shared/models/cart-product';
+import { environment } from '../../environments/environment';
+import { LoadingComponent } from '../shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-product',
-  imports: [NgOptimizedImage, CurrencyPipe],
+  imports: [NgOptimizedImage, CurrencyPipe, CommonModule, LoadingComponent],
   templateUrl: './product.component.html',
 })
 export class ProductComponent implements OnInit {
@@ -15,13 +17,57 @@ export class ProductComponent implements OnInit {
   route = inject(ActivatedRoute);
   productsService = inject(ProductsService);
   product?: Product;
+  isLoading = signal(true);
+
+  // Galería de imágenes
+  allImages: string[] = [];
+  selectedImageIndex = 0;
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.productsService.getById(params['id']).subscribe((product) => {
         this.product = product;
+        this.initializeGallery();
+        this.isLoading.set(false);
       });
     });
+  }
+
+  initializeGallery(): void {
+    if (!this.product) return;
+
+    this.allImages = [];
+
+    // Agregar imagen principal
+    if (this.product.urlImg) {
+      this.allImages.push(this.product.urlImg);
+    }
+
+    // Agregar imágenes adicionales
+    if (this.product.images && this.product.images.length > 0) {
+      this.allImages.push(...this.product.images);
+    }
+
+    this.selectedImageIndex = 0;
+  }
+
+  selectImage(index: number): void {
+    this.selectedImageIndex = index;
+  }
+
+  get currentImage(): string {
+    return this.allImages[this.selectedImageIndex] || '';
+  }
+
+  getFullImageUrl(url: string): string {
+    if (!url) return '';
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+    if (url.startsWith('/api/')) {
+      return `${environment.apiUrl.replace('/api', '')}${url}`;
+    }
+    return url;
   }
 
   addToCart() {

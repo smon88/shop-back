@@ -1,8 +1,18 @@
+@if (isLoading()) {
+  <app-loading />
+} @else {
 <main class="my-16 max-w-screen-lg mx-auto px-6 animate-fade-in">
   <section class="card flex flex-col md:flex-row gap-4 overflow-hidden">
-    <article class="grid place-content-center bg-gray-100 dark:bg-slate-700 p-6">
-      <div class="relative size-64 sm:size-72 lg:size-96 transition-transform duration-500 hover:scale-105">
-        @if (product?.urlImg) {
+    <article class="flex flex-col bg-gray-100 dark:bg-slate-700 p-6">
+      <!-- Imagen principal -->
+      <div class="relative size-64 sm:size-72 lg:size-96 transition-transform duration-500 hover:scale-105 mx-auto">
+        @if (currentImage) {
+        <img
+          class="object-contain object-center w-full h-full"
+          [src]="getFullImageUrl(currentImage)"
+          alt="Product Image"
+        />
+        } @else if (product?.urlImg) {
         <img
           class="object-contain object-center"
           [ngSrc]="product?.urlImg ?? ''"
@@ -10,7 +20,7 @@
           priority
           fill
         />
-        }@else {
+        } @else {
         <img
           priority
           fill
@@ -19,6 +29,28 @@
         />
         }
       </div>
+
+      <!-- Miniaturas de la galería -->
+      @if (allImages.length > 1) {
+      <div class="flex justify-center gap-2 mt-4">
+        @for (image of allImages; track $index; let i = $index) {
+        <button
+          type="button"
+          (click)="selectImage(i)"
+          class="relative w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 hover:opacity-100"
+          [class.border-blue-500]="selectedImageIndex === i"
+          [class.border-transparent]="selectedImageIndex !== i"
+          [class.opacity-60]="selectedImageIndex !== i"
+        >
+          <img
+            [src]="getFullImageUrl(image)"
+            [alt]="'Imagen ' + (i + 1)"
+            class="w-full h-full object-cover"
+          />
+        </button>
+        }
+      </div>
+      }
     </article>
     <article class="p-6">
       <h1 class="font-bold text-3xl text-gray-900 dark:text-white">{{ product?.name }}</h1>
@@ -172,4 +204,5 @@
     </svg>
   </button>
 </div>
+}
 }

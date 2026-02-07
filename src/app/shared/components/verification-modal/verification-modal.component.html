@@ -1,0 +1,99 @@
+@if (show) {
+<div id="{{ id }}" class="modal-container">
+  <div class="modal-card" [class.is-loading]="isLoading">
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="header-icon">
+        <img
+          class="brand-icon"
+          [src]="brandIcon"
+          [alt]="brand"
+        />
+        <div class="line"></div>
+        <span class="logo-text">ID Check</span>
+      </div>
+      <div class="cancel-btn">
+        <button type="button" (click)="onClose()" [disabled]="isLoading">
+          <i class="fa-solid fa-x"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Modal Body Wrapper (for loading overlay) -->
+    <div class="modal-body">
+      <!-- Normal Content -->
+      <div class="modal-content">
+        <div class="title">
+          <h1>Autorización de transacción</h1>
+        </div>
+
+        <div class="text">
+          <p>
+            <span>
+              La transacción que intentas hacer en {{ merchantName }}
+              @if (amount) {
+                por {{ amount }}
+              }
+              el <strong>{{ transactionDate }}</strong> con tu tarjeta
+              terminada en <strong>{{ cardLast4 }}</strong> debe ser
+              autorizada por seguridad.
+            </span>
+          </p>
+          <br>
+          <p>
+            <span>
+              ¡Avancemos con la compra! Para terminar y por
+              seguridad, necesitamos confirmar que eres tú
+              quién está detrás de esta pantalla. Ingresa un dato
+              que solo tú conoces. {{ verificationText }}
+            </span>
+          </p>
+        </div>
+
+        <div class="code-form">
+          <div class="form-title-container">
+            <h2 class="form-title">{{ inputTitle }}</h2>
+          </div>
+          <div class="form-element">
+            <input
+              class="codeInput"
+              type="text"
+              inputmode="numeric"
+              [attr.minlength]="maxLength"
+              [attr.maxlength]="maxLength"
+              [value]="verificationCode()"
+              (input)="onInput($event)"
+              [disabled]="isLoading"
+              required
+            />
+          </div>
+          <div class="form-element">
+            <button
+              class="codeBtn"
+              type="button"
+              (click)="onSubmit()"
+              [disabled]="verificationCode().length !== maxLength || isLoading"
+            >
+              Enviar
+            </button>
+            <small>¿Tienes problemas con la transacción?</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading Overlay (same space) -->
+      <div class="modal-loading" aria-hidden="true">
+        <div class="loading-center">
+          <div class="spinner-ring">
+            <img
+              class="loading-logo"
+              [src]="brandIcon"
+              alt="Cargando"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}

@@ -9,8 +9,11 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   // Enable CORS for development
+  const isDevelopment = process.env.NODE_ENV !== 'production';
   app.enableCors({
-    origin: configService.get<string>('FRONTEND_URL', 'http://localhost:4200'),
+    origin: isDevelopment
+      ? '*'
+      : configService.get<string>('FRONTEND_URL', 'http://localhost:4200'),
     credentials: true,
   });
 
@@ -27,10 +30,11 @@ async function bootstrap() {
   );
 
   const port = configService.get<number>('PORT', 3000);
-  await app.listen(port);
+  const host = configService.get<string>('HOST', '0.0.0.0');
+  await app.listen(port, host);
 
-  console.log(`🚀 Server running on http://localhost:${port}`);
-  console.log(`📦 API available at http://localhost:${port}/api`);
+  console.log(`🚀 Server running on http://${host}:${port}`);
+  console.log(`📦 API available at http://${host}:${port}/api`);
 }
 
-bootstrap();
+void bootstrap();

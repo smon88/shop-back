@@ -6,6 +6,7 @@ import { join } from 'path';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { SeedModule } from './database/seed/seed.module';
+import { UploadsModule } from './uploads/uploads.module';
 import { getDatabaseConfig } from './config/database.config';
 
 @Module({
@@ -32,6 +33,7 @@ import { getDatabaseConfig } from './config/database.config';
     // Feature Modules
     ProductsModule,
     OrdersModule,
+    UploadsModule,
 
     // Database Seeding (development)
     SeedModule,

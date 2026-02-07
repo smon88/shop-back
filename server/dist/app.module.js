@@ -15,6 +15,7 @@ const path_1 = require("path");
 const products_module_1 = require("./products/products.module");
 const orders_module_1 = require("./orders/orders.module");
 const seed_module_1 = require("./database/seed/seed.module");
+const uploads_module_1 = require("./uploads/uploads.module");
 const database_config_1 = require("./config/database.config");
 let AppModule = class AppModule {
 };
@@ -37,6 +38,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             products_module_1.ProductsModule,
             orders_module_1.OrdersModule,
+            uploads_module_1.UploadsModule,
             seed_module_1.SeedModule,
         ],
     })

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../../shared/models/product';
+import { Product, CreateProductDto, UpdateProductDto } from '../../shared/models/product';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -29,5 +29,17 @@ export class ProductsService {
 
   getByCategory(category: string): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.baseUrl}/category/${category}`);
+  }
+
+  create(product: CreateProductDto): Observable<Product> {
+    return this.http.post<Product>(this.baseUrl, product);
+  }
+
+  update(id: number, product: UpdateProductDto): Observable<Product> {
+    return this.http.patch<Product>(`${this.baseUrl}/${id}`, product);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }

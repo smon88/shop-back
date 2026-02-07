@@ -5,6 +5,7 @@ export declare class CreateProductDto {
     reviews?: number;
     previousPrice?: number;
     urlImg: string;
+    images?: string[];
     isActive?: boolean;
     stock?: number;
     category?: string;

@@ -1,0 +1,295 @@
+/* Modal Container (Overlay) */
+.modal-container {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+/* Modal Card */
+.modal-card {
+  background-color: rgb(255 252 252);
+  margin: auto;
+  height: fit-content;
+  border-radius: 6px;
+  max-width: 28rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.modal-card span {
+  font-size: 15px;
+  align-items: center;
+  text-align: justify;
+}
+
+.logo-text {
+  white-space: pre;
+  font-size: 24px;
+}
+
+.line {
+  display: flex;
+  border: 1px solid #c7c6c6;
+  width: 23px;
+  height: 81%;
+  align-items: center;
+  background: #c7c6c6;
+  margin: 0 8px;
+  vertical-align: middle;
+}
+
+.modal-card small {
+  font-size: small;
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  color: #6b7280;
+}
+
+/* Modal Header */
+.modal-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0 0px 9px rgb(0 0 0 / 30%);
+  border: none;
+  background-color: rgb(255 255 255);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.header-icon {
+  width: 21%;
+  display: inline-flex;
+  padding: 6px;
+  align-items: center;
+}
+
+.cancel-btn {
+  width: 30%;
+  display: flex;
+  justify-content: end;
+  padding: 12px;
+  align-items: baseline;
+}
+
+.cancel-btn button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #6b7280;
+  transition: all 0.2s;
+}
+
+.cancel-btn button:hover:not(:disabled) {
+  color: #1f2937;
+}
+
+.cancel-btn button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.modal-header img {
+  width: 90%;
+}
+
+/* Title */
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.title h1 {
+  padding: 6px 18px;
+  margin: 12px 0px;
+  font-size: xx-large;
+  font-weight: 600;
+  white-space: pre-wrap;
+  text-align: center;
+}
+
+/* Text Content */
+.text {
+  padding: 3px 21px 9px;
+}
+
+.text p {
+  padding: 3px;
+  line-height: 1.5;
+}
+
+/* Code Form */
+.code-form {
+  padding: 12px 21px 21px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.form-element {
+  width: 100%;
+}
+
+.form-element input {
+  font-size: 16px;
+  height: 2rem;
+  width: 100%;
+  border: 0.9px solid #b4b4b4;
+  text-align: center;
+  letter-spacing: 3px;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.form-element input:focus {
+  outline: none;
+  border-color: #1434cb;
+  box-shadow: 0 0 0 3px rgba(20, 52, 203, 0.1);
+}
+
+.form-element input:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+button.codeBtn {
+  width: 100%;
+  border-radius: 6px;
+  height: 2rem;
+  border: none;
+  color: #ffffff;
+  background-color: #1434cb;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+button.codeBtn:hover:not(:disabled) {
+  background-color: #0f28a3;
+}
+
+button.codeBtn:disabled {
+  opacity: 0.7;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.form-title {
+  text-align: center;
+  font-weight: 500;
+  font-size: larger;
+  margin-bottom: 0.5rem;
+}
+
+/* Modal Body & Loading */
+.modal-body {
+  position: relative;
+}
+
+.modal-content {
+  transition: visibility 0.3s;
+}
+
+/* Modal Loading Overlay */
+.modal-loading {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.92);
+  z-index: 5;
+  border-radius: inherit;
+}
+
+/* When modal is loading, show overlay */
+.modal-card.is-loading .modal-loading {
+  display: flex;
+}
+
+.modal-card.is-loading .modal-content {
+  visibility: hidden;
+}
+
+/* Loading Center */
+.loading-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Spinner Ring + Logo */
+.spinner-ring {
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+/* Spinner circular animation */
+.spinner-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 4px solid rgba(0, 0, 0, 0.12);
+  border-top-color: rgba(0, 0, 0, 0.75);
+  animation: spin 0.9s linear infinite;
+}
+
+/* Logo in center of spinner */
+.loading-logo {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+/* Brand icon in header */
+.brand-icon {
+  max-width: 60px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .modal-card {
+    max-width: 100%;
+    margin: 0 0.5rem;
+  }
+
+  .header-icon {
+    width: 25%;
+  }
+
+  .title h1 {
+    font-size: x-large;
+  }
+
+  .text {
+    font-size: 14px;
+  }
+}

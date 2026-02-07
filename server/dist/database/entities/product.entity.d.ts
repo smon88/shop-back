@@ -6,6 +6,7 @@ export declare class Product {
     reviews: number;
     previousPrice: number | null;
     urlImg: string;
+    images: string[];
     isActive: boolean;
     stock: number;
     category: string;

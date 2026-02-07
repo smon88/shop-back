@@ -2,10 +2,11 @@ import { Component, input, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { RouterLink } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
+import { ImageUrlPipe } from '../../pipes/image-url.pipe';
 
 @Component({
   selector: 'app-product-offer',
-  imports: [RouterLink, CurrencyPipe],
+  imports: [RouterLink, CurrencyPipe, ImageUrlPipe],
   templateUrl: './product-offer.component.html',
 })
 export class ProductOfferComponent implements OnInit {

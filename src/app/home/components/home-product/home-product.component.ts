@@ -1,11 +1,12 @@
 import { Component, input } from '@angular/core';
 import { Product } from '../../../shared/models/product';
-import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ImageUrlPipe } from '../../../shared/pipes/image-url.pipe';
 
 @Component({
   selector: 'app-home-product',
-  imports: [NgOptimizedImage, RouterLink, CurrencyPipe],
+  imports: [RouterLink, CurrencyPipe, ImageUrlPipe],
   templateUrl: './home-product.component.html',
 })
 export class HomeProductComponent {

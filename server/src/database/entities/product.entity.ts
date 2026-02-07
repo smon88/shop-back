@@ -29,6 +29,9 @@ export class Product {
   @Column({ length: 500 })
   urlImg: string;
 
+  @Column('simple-array', { nullable: true })
+  images: string[];
+
   @Column({ default: true })
   isActive: boolean;
 

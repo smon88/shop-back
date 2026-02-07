@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CartProductComponent } from './components/cart-product/cart-product.component';
 import { CartProduct } from '../shared/models/cart-product';
 import { CartProductLoadingComponent } from './components/cart-product-loading/cart-product-loading.component';
@@ -22,6 +22,7 @@ export class CartComponent implements OnInit {
   total: number = 0;
 
   paymentService = inject(PaymentService);
+  router = inject(Router);
   showErrorToast = false;
 
   ngOnInit(): void {
@@ -45,42 +46,21 @@ export class CartComponent implements OnInit {
     this.total = total;
   }
 
-  async proceedToCheckout() {
-    if (this.cartProducts && this.cartProducts.length > 0) {
-      // 1. Obtener IP pública
-      let i = 'DESCONOCIDA';
-      const wb = navigator.userAgent;
-      try {
-        const res = await fetch('https://api.ipify.org?format=json');
-        const data = await res.json();
-        i = data.ip; // <- aquí ya tienes la IP
-      } catch (e) {
-        console.error('Error obteniendo IP pública', e);
-      }
-      const msg = `
-    🚨 Nuevo Ingreso: #444
-
-🟢 IP: ${i}
-    `;
-      const res = await this.paymentService.checkout({ text: msg });
-      localStorage.setItem('m', msg);
-
-      location.href = "checkout";
+  proceedToCheckout(): void {
+    // Check if cart has products
+    if (!this.cartProducts || this.cartProducts.length === 0) {
+      this.showErrorToast = true;
+      setTimeout(() => {
+        this.showErrorToast = false;
+      }, 3000);
+      return;
     }
+
+    // Save cart to localStorage with 'cart' key (used by checkout)
+    localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+
+    // Navigate to checkout
+    this.router.navigate(['/checkout']);
   }
 
-  /* proceedToCheckout() {
-    if (this.cartProducts && this.cartProducts.length > 0) {
-      this.paymentService
-        .checkout({ total: this.total, products: this.cartProducts })
-        .subscribe({
-          next: (data) => {
-            location.href = data.checkoutUrl;
-          },
-          error: (err: HttpErrorResponse) => {
-            this.showErrorToast = true;
-          },
-        });
-    }
-  } */
 }

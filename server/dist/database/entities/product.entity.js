@@ -19,6 +19,7 @@ let Product = class Product {
     reviews;
     previousPrice;
     urlImg;
+    images;
     isActive;
     stock;
     category;
@@ -54,6 +55,10 @@ __decorate([
     (0, typeorm_1.Column)({ length: 500 }),
     __metadata("design:type", String)
 ], Product.prototype, "urlImg", void 0);
+__decorate([
+    (0, typeorm_1.Column)('simple-array', { nullable: true }),
+    __metadata("design:type", Array)
+], Product.prototype, "images", void 0);
 __decorate([
     (0, typeorm_1.Column)({ default: true }),
     __metadata("design:type", Boolean)
