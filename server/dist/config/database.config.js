@@ -10,7 +10,7 @@ const getDatabaseConfig = (configService) => ({
     password: configService.get('DB_PASSWORD', 'postgres'),
     database: configService.get('DB_DATABASE', 'zentra_shop'),
     entities: [entities_1.Product, entities_1.Order, entities_1.OrderItem],
-    synchronize: configService.get('NODE_ENV') === 'development',
+    synchronize: false,
     logging: configService.get('NODE_ENV') === 'development',
 });
 exports.getDatabaseConfig = getDatabaseConfig;
