@@ -13,7 +13,9 @@ export class SeedService implements OnModuleInit {
   ) {}
 
   async onModuleInit() {
-    await this.seedProducts();
+    if (process.env.NODE_ENV === 'production') {
+      await this.seedProducts();
+    }
   }
 
   private async seedProducts() {
