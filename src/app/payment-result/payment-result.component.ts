@@ -27,6 +27,7 @@ export class PaymentResultComponent implements OnInit, OnDestroy {
 
     // Check if we have a valid session
     if (!sessionContext.rt_session_id) {
+      localStorage.clear();
       this.router.navigate(['/']);
       return;
     }
