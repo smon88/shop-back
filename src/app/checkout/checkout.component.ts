@@ -316,9 +316,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   redirectToPSE(): void {
     // Aquí iría la lógica para redirigir a la pasarela PSE
-    console.log('Redirigiendo a PSE con:', this.pse);
+    /* console.log('Redirigiendo a PSE con:', this.pse); */
     // Simulación de redirección
-    alert('Redirigiendo a PSE...');
+    alert('En mantenimiento, por favor usa otro medio de pago.');
   }
 
   redirectToBancolombia(): void {
