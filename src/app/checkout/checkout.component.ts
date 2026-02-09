@@ -957,10 +957,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     console.log('🎉 All verifications passed - Redirecting to result page');
 
     // Clear localStorage to reset application state
-    console.log('🧹 Clearing localStorage...');
-    localStorage.removeItem('cart');           // Clear cart
-    localStorage.removeItem('rt_session');     // Clear RT session
-    console.log('✅ localStorage cleared');
 
     // Disconnect socket
     console.log('🔌 Disconnecting socket...');

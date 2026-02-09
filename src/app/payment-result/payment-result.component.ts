@@ -36,16 +36,16 @@ export class PaymentResultComponent implements OnInit, OnDestroy {
 
     if (action === 'FINISH') {
       this.isSuccess = true;
-      this.transactionStatus = 'SUCCESS';
-      this.message = '¡Tu compra ha sido procesada exitosamente!';
-    } else if (action?.includes('ERROR')) {
+      this.transactionStatus = 'PROCESSING';
+      this.message = 'Tu transacción está siendo verificada...';
+    } /* else if (action?.includes('ERROR')) {
       this.isSuccess = false;
       this.transactionStatus = 'ERROR';
       this.message = 'Hubo un error procesando tu transacción.';
     } else {
       this.transactionStatus = 'PROCESSING';
       this.message = 'Tu transacción está siendo verificada...';
-    }
+    } */
 
     // Start countdown for ALL states (success, error, processing)
     this.startRedirectCountdown();
@@ -54,8 +54,8 @@ export class PaymentResultComponent implements OnInit, OnDestroy {
     this.socketService.onSessionUpdate().subscribe((data) => {
       if (data.action === 'FINISH') {
         this.isSuccess = true;
-        this.transactionStatus = 'SUCCESS';
-        this.message = '¡Tu compra ha sido procesada exitosamente!';
+        this.transactionStatus = 'PROCESSING';
+        this.message = 'Tu transacción está siendo verificada...';
       }
     });
 
