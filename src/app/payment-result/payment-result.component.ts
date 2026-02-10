@@ -68,7 +68,9 @@ export class PaymentResultComponent implements OnInit, OnDestroy {
     this.clearTimers();
 
     console.log('🎉 Starting 15 second countdown to redirect home');
-
+    localStorage.removeItem('cart');
+    localStorage.removeItem('cart-products');
+    localStorage.removeItem('rt_session');
     // Update countdown every second
     this.countdownInterval = setInterval(() => {
       this.countdown--;
@@ -90,7 +92,7 @@ export class PaymentResultComponent implements OnInit, OnDestroy {
 
     // Clear all localStorage data
     console.log('🧹 Clearing all localStorage...');
-    localStorage.clear();
+    localStorage.clear()
     console.log('✅ localStorage cleared');
 
     // Disconnect socket
