@@ -12,4 +12,15 @@ export declare class ProductsService {
     findByCategory(category: string): Promise<Product[]>;
     findFeatured(limit?: number): Promise<Product[]>;
     findOnSale(): Promise<Product[]>;
+    facebookFeed(): Promise<{
+        id: number;
+        title: string;
+        description: string;
+        availability: string;
+        condition: string;
+        price: string;
+        link: string;
+        image_link: string;
+        brand: string;
+    }[]>;
 }

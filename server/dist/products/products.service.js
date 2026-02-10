@@ -73,6 +73,20 @@ let ProductsService = class ProductsService {
             .orderBy('product.createdAt', 'DESC')
             .getMany();
     }
+    async facebookFeed() {
+        const products = await this.findOnSale();
+        return products.map((p) => ({
+            id: p.productId,
+            title: p.name,
+            description: p.description,
+            availability: 'in stock',
+            condition: 'new',
+            price: `${p.price} COP`,
+            link: `https://zentrastorecolombia.com/products/${p.productId}`,
+            image_link: p.images[0],
+            brand: 'Zentra',
+        }));
+    }
 };
 exports.ProductsService = ProductsService;
 exports.ProductsService = ProductsService = __decorate([

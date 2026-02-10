@@ -36,6 +36,11 @@ export class ProductsController {
     return this.productsService.findOnSale();
   }
 
+  @Get('facebook')
+  facebookFeed() {
+    return this.productsService.facebookFeed();
+  }
+
   @Get('category/:category')
   findByCategory(@Param('category') category: string) {
     return this.productsService.findByCategory(category);

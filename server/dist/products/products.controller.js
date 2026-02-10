@@ -33,6 +33,9 @@ let ProductsController = class ProductsController {
     findOnSale() {
         return this.productsService.findOnSale();
     }
+    facebookFeed() {
+        return this.productsService.facebookFeed();
+    }
     findByCategory(category) {
         return this.productsService.findByCategory(category);
     }
@@ -73,6 +76,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "findOnSale", null);
+__decorate([
+    (0, common_1.Get)('facebook'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "facebookFeed", null);
 __decorate([
     (0, common_1.Get)('category/:category'),
     __param(0, (0, common_1.Param)('category')),
