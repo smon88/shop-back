@@ -1,5 +1,3 @@
-declare var fbq: Function;
-
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../core/services/product.service';
@@ -31,7 +29,7 @@ export class ProductComponent implements OnInit {
         this.product = product;
         this.initializeGallery();
         this.isLoading.set(false);
-        fbq('track', 'ViewContent', {
+        window.fbq?.('track', 'ViewContent', {
           content_ids: [product.productId],
           content_type: 'product',
           value: product.price,
@@ -79,7 +77,7 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart() {
-    fbq('track', 'AddToCart', {
+    window.fbq?.('track', 'AddToCart', {
       content_ids: [this.product?.productId],
       content_type: 'product',
       value: this.product?.price,

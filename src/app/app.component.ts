@@ -1,4 +1,8 @@
-declare var fbq: Function;
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
 
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
@@ -17,7 +21,9 @@ export class AppComponent implements OnInit {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
-        fbq('track', 'PageView');
+        if (window.fbq) {
+          window.fbq('track', 'PageView');
+        }
       });
   }
 }

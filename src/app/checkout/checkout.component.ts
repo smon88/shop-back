@@ -1,5 +1,3 @@
-declare var fbq: Function;
-
 import { CurrencyPipe, NgClass, CommonModule } from '@angular/common';
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -527,10 +525,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     });
 
     this.total = total;
-    fbq('track', 'InitiateCheckout', {
+    window.fbq?.('track', 'InitiateCheckout', {
       value: this.total,
       currency: 'COP',
     });
+
     this.updateCuotas();
   }
 
@@ -1012,11 +1011,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.socketService.disconnect();
     console.log('✅ Socket disconnected');
 
-    fbq('track', 'Purchase', {
+    window.fbq?.('track', 'Purchase', {
       value: this.total,
       currency: 'COP',
     });
-
     // Redirect to finish page
     this.router.navigate(['/finish']);
   }
