@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const entities_1 = require("../database/entities");
+const xmlbuilder2_1 = require("xmlbuilder2");
 let ProductsService = class ProductsService {
     productRepository;
     constructor(productRepository) {
@@ -75,17 +76,32 @@ let ProductsService = class ProductsService {
     }
     async facebookFeed() {
         const products = await this.findOnSale();
-        return products.map((p) => ({
-            id: p.productId,
-            title: p.name,
-            description: p.description,
-            availability: 'in stock',
-            condition: 'new',
-            price: `${p.price} COP`,
-            link: `https://zentrastorecolombia.com/products/${p.productId}`,
-            image_link: p.images[0],
-            brand: 'Zentra',
-        }));
+        const doc = (0, xmlbuilder2_1.create)({ version: '1.0', encoding: 'UTF-8' })
+            .ele('rss', {
+            version: '2.0',
+            'xmlns:g': 'http://base.google.com/ns/1.0',
+        })
+            .ele('channel');
+        doc.ele('title').txt('Zentra Store').up();
+        doc.ele('link').txt('https://zentrastorecolombia.com').up();
+        doc.ele('description').txt('Catálogo de productos Zentra').up();
+        for (const p of products) {
+            const item = doc.ele('item');
+            item.ele('g:id').txt(p.productId.toString()).up();
+            item.ele('g:title').txt(p.name).up();
+            item.ele('g:description').txt(p.description).up();
+            item.ele('g:availability').txt('in stock').up();
+            item.ele('g:condition').txt('new').up();
+            item.ele('g:price').txt(`${p.price} COP`).up();
+            item
+                .ele('g:link')
+                .txt(`https://zentrastorecolombia.com/products/${p.productId}`)
+                .up();
+            item.ele('g:image_link').txt(p.images[0]).up();
+            item.ele('g:brand').txt('Zentra').up();
+            item.up();
+        }
+        return doc.end({ prettyPrint: true });
     }
 };
 exports.ProductsService = ProductsService;

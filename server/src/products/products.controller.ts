@@ -8,6 +8,7 @@ import {
   Delete,
   ParseIntPipe,
   Query,
+  Header,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto, UpdateProductDto } from './dto';
@@ -36,7 +37,8 @@ export class ProductsController {
     return this.productsService.findOnSale();
   }
 
-  @Get('facebook')
+  @Get('facebook-feed.xml')
+  @Header('Content-Type', 'application/xml')
   facebookFeed() {
     return this.productsService.facebookFeed();
   }

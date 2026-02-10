@@ -77,7 +77,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "findOnSale", null);
 __decorate([
-    (0, common_1.Get)('facebook'),
+    (0, common_1.Get)('facebook-feed.xml'),
+    (0, common_1.Header)('Content-Type', 'application/xml'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
