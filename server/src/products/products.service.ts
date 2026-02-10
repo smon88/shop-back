@@ -105,7 +105,7 @@ export class ProductsService {
         .up();
       item
         .ele('g:image_link')
-        .txt(`https://zentrastorecolombia.com/${p.images[0]}`)
+        .txt(`https://zentrastorecolombia.com${p.images[0]}`)
         .up();
       item.ele('g:brand').txt('Zentra').up();
 
