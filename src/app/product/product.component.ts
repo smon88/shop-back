@@ -1,3 +1,5 @@
+declare var fbq: Function;
+
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../core/services/product.service';
@@ -29,6 +31,12 @@ export class ProductComponent implements OnInit {
         this.product = product;
         this.initializeGallery();
         this.isLoading.set(false);
+        fbq('track', 'ViewContent', {
+          content_ids: [product.productId],
+          content_type: 'product',
+          value: product.price,
+          currency: 'COP',
+        });
       });
     });
   }
@@ -71,27 +79,34 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart() {
+    fbq('track', 'AddToCart', {
+      content_ids: [this.product?.productId],
+      content_type: 'product',
+      value: this.product?.price,
+      currency: 'COP',
+    });
     const storagedProducts: CartProduct[] =
       JSON.parse(localStorage.getItem('cart-products') as string) || [];
 
     const matched = storagedProducts.find(
-      (cartProduct) => cartProduct.productId == this.product?.productId
+      (cartProduct) => cartProduct.productId == this.product?.productId,
     );
     if (matched) {
       matched.quantity++;
       localStorage.setItem('cart-products', JSON.stringify(storagedProducts));
     } else {
       storagedProducts.push({
-        productId: this.product?.productId || 1, quantity: 1,
+        productId: this.product?.productId || 1,
+        quantity: 1,
         productName: this.product?.name || '',
         productImg: this.product?.urlImg || '',
-        productPrice: this.product?.price || 0
+        productPrice: this.product?.price || 0,
       });
       localStorage.setItem('cart-products', JSON.stringify(storagedProducts));
     }
     this.showSuccessToast = true;
-    setTimeout(()=> {
+    setTimeout(() => {
       this.showSuccessToast = false;
-    },3000)
+    }, 3000);
   }
 }

