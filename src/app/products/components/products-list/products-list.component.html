@@ -25,10 +25,10 @@
       </p>
     </div>
     <div class="font-bold mt-1">
-      <p class="text-base sm:text-lg lg:text-xl text-gray-900 dark:text-white">{{ product().price | currency }}</p>
+      <p class="text-base sm:text-lg lg:text-xl text-gray-900 dark:text-white">{{ product().price | copCurrency }}</p>
       @if (product().previousPrice) {
       <del class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{{
-        product().previousPrice | currency
+        product().previousPrice | copCurrency
       }}</del>
       }
     </div>

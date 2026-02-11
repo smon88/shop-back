@@ -2,14 +2,15 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../core/services/product.service';
 import { Product } from '../shared/models/product';
-import { CurrencyPipe, NgOptimizedImage, CommonModule } from '@angular/common';
+import { NgOptimizedImage, CommonModule } from '@angular/common';
+import { CopCurrencyPipe } from '../shared/pipes/cop-currency.pipe';
 import { CartProduct } from '../shared/models/cart-product';
 import { environment } from '../../environments/environment';
 import { LoadingComponent } from '../shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-product',
-  imports: [NgOptimizedImage, CurrencyPipe, CommonModule, LoadingComponent],
+  imports: [NgOptimizedImage, CopCurrencyPipe, CommonModule, LoadingComponent],
   templateUrl: './product.component.html',
 })
 export class ProductComponent implements OnInit {

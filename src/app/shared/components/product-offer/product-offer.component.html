@@ -24,8 +24,8 @@
         <span class="text-[10px] text-gray-500 dark:text-gray-400">{{ product().reviews }}</span>
       </div>
       <div class="mt-1">
-        <span class="text-base font-bold text-gray-900 dark:text-white">{{ product().price | currency }}</span>
-        <del class="text-xs text-gray-500 dark:text-gray-400 ml-1">{{ product().previousPrice | currency }}</del>
+        <span class="text-base font-bold text-gray-900 dark:text-white">{{ product().price | copCurrency }}</span>
+        <del class="text-xs text-gray-500 dark:text-gray-400 ml-1">{{ product().previousPrice | copCurrency }}</del>
       </div>
       <a
         [routerLink]="['products', product().productId]"
@@ -50,8 +50,8 @@
         <span class="text-xs text-gray-500 dark:text-gray-400 border-l border-gray-300 dark:border-gray-600 pl-2">{{ product().reviews }} reseñas</span>
       </div>
       <div class="mt-2">
-        <p class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">{{ product().price | currency }}</p>
-        <del class="text-sm text-gray-500 dark:text-gray-400">{{ product().previousPrice | currency }}</del>
+        <p class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">{{ product().price | copCurrency }}</p>
+        <del class="text-sm text-gray-500 dark:text-gray-400">{{ product().previousPrice | copCurrency }}</del>
       </div>
       <a
         [routerLink]="['products', product().productId]"

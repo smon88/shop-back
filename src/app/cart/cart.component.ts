@@ -3,7 +3,8 @@ import { Router, RouterLink } from '@angular/router';
 import { CartProductComponent } from './components/cart-product/cart-product.component';
 import { CartProduct } from '../shared/models/cart-product';
 import { CartProductLoadingComponent } from './components/cart-product-loading/cart-product-loading.component';
-import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
+import { CopCurrencyPipe } from '../shared/pipes/cop-currency.pipe';
 import { PaymentService } from '../core/services/payment.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { PaymentService } from '../core/services/payment.service';
     RouterLink,
     CartProductComponent,
     CartProductLoadingComponent,
-    CurrencyPipe,
+    CopCurrencyPipe,
     NgOptimizedImage,
   ],
   templateUrl: './cart.component.html',

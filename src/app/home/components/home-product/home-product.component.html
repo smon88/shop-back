@@ -21,9 +21,9 @@
       <span class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 hidden sm:inline">{{ product().reviews }}</span>
     </div>
     <div class="font-bold mt-0.5">
-      <p class="text-sm sm:text-base md:text-lg text-gray-900 dark:text-white">{{ product().price | currency }}</p>
+      <p class="text-sm sm:text-base md:text-lg text-gray-900 dark:text-white">{{ product().price | copCurrency }}</p>
       @if (product().previousPrice) {
-      <del class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">{{ product().previousPrice | currency }}</del>
+      <del class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">{{ product().previousPrice | copCurrency }}</del>
       }
     </div>
   </div>

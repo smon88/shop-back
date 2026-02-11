@@ -497,7 +497,7 @@
                       required
                     >
                       @if (card.method === 'debit') {
-                        <option value="1">Total - {{ total | currency }} (1 cuota)</option>
+                        <option value="1">Total - {{ total | copCurrency }} (1 cuota)</option>
                       } @else {
                         <option value="" disabled>Selecciona una opción</option>
                         @for (cuota of cuotas; track cuota.value) {
@@ -656,7 +656,7 @@
           <div class="space-y-4">
             <dl class="flex items-center justify-between gap-4 border-t border-gray-200 dark:border-slate-700 pt-2">
               <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-              <dd class="text-base font-bold text-gray-900 dark:text-white">{{ total | currency }}</dd>
+              <dd class="text-base font-bold text-gray-900 dark:text-white">{{ total | copCurrency }}</dd>
             </dl>
           </div>
 

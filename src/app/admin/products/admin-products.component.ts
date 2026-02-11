@@ -7,6 +7,7 @@ import { UploadService } from '../../core/services/upload.service';
 import { Product, CreateProductDto } from '../../shared/models/product';
 import { environment } from '../../../environments/environment';
 import { forkJoin } from 'rxjs';
+import { CopCurrencyPipe } from '../../shared/pipes/cop-currency.pipe';
 
 interface ImageSlot {
   file: File | null;
@@ -17,7 +18,7 @@ interface ImageSlot {
 @Component({
   selector: 'app-admin-products',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, CopCurrencyPipe],
   templateUrl: './admin-products.component.html',
   styleUrl: './admin-products.component.css',
 })

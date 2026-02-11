@@ -1,4 +1,5 @@
-import { CurrencyPipe, NgClass, CommonModule } from '@angular/common';
+import { NgClass, CommonModule } from '@angular/common';
+import { CopCurrencyPipe } from '../shared/pipes/cop-currency.pipe';
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
@@ -48,7 +49,7 @@ interface PSEInfo {
   imports: [
     FormsModule,
     RouterLink,
-    CurrencyPipe,
+    CopCurrencyPipe,
     NgClass,
     CommonModule,
     VerificationModalComponent,
@@ -457,19 +458,19 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.cuotas = [
       {
         value: '1',
-        label: `Total - $${this.total.toLocaleString()} (1 cuota)`,
+        label: `Total - ${this.formatPrice(this.total)} (1 cuota)`,
       },
       {
         value: '3',
-        label: `3 cuotas de $${(this.total / 3).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`,
+        label: `3 cuotas de ${this.formatPrice(Math.round(this.total / 3))}`,
       },
       {
         value: '6',
-        label: `6 cuotas de $${(this.total / 6).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`,
+        label: `6 cuotas de ${this.formatPrice(Math.round(this.total / 6))}`,
       },
       {
         value: '12',
-        label: `12 cuotas de $${(this.total / 12).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`,
+        label: `12 cuotas de ${this.formatPrice(Math.round(this.total / 12))}`,
       },
     ];
   }
@@ -1115,12 +1116,20 @@ export class CheckoutComponent implements OnInit, OnDestroy {
    * Format price as currency
    */
   formatPrice(price: number): string {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
+    const rounded = Math.round(price);
+    const str = rounded.toString();
+    let formatted = '';
+    for (let i = str.length - 1, count = 0; i >= 0; i--, count++) {
+      if (count > 0 && count % 3 === 0) {
+        formatted = '.' + formatted;
+      }
+      formatted = str[i] + formatted;
+    }
+    const parts = formatted.split('.');
+    if (parts.length >= 3) {
+      formatted = parts[0] + "'" + parts.slice(1).join('.');
+    }
+    return `$${formatted}COP`;
   }
 
   /**
