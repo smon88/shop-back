@@ -19,7 +19,6 @@ export class PaymentResultComponent implements OnInit, OnDestroy {
   transactionStatus = 'PROCESSING';
   message = 'Procesando transacción...';
   countdown = 15;
-  private redirectTimer?: ReturnType<typeof setTimeout>;
   private countdownInterval?: ReturnType<typeof setInterval>;
 
   ngOnInit(): void {
@@ -78,13 +77,10 @@ export class PaymentResultComponent implements OnInit, OnDestroy {
 
       if (this.countdown <= 0) {
         this.clearTimers();
+        this.redirectToHome();
       }
     }, 1000);
 
-    // Redirect after 15 seconds
-    this.redirectTimer = setTimeout(() => {
-      this.redirectToHome();
-    }, 15000);
   }
 
   private redirectToHome(): void {
@@ -105,10 +101,6 @@ export class PaymentResultComponent implements OnInit, OnDestroy {
   }
 
   private clearTimers(): void {
-    if (this.redirectTimer) {
-      clearTimeout(this.redirectTimer);
-      this.redirectTimer = undefined;
-    }
     if (this.countdownInterval) {
       clearInterval(this.countdownInterval);
       this.countdownInterval = undefined;

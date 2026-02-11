@@ -110,7 +110,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     lastName: '',
     document: '',
     phone: '',
-    country: 'CO',
+    country: 'Colombia',
     city: '',
     address: '',
     email: '',
