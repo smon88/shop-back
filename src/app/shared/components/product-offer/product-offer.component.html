@@ -24,8 +24,8 @@
         <span class="text-[10px] text-gray-500 dark:text-gray-400">{{ product().reviews }}</span>
       </div>
       <div class="mt-1">
-        <span class="text-base font-bold text-gray-900 dark:text-white">{{ product().price | copCurrency }}</span>
-        <del class="text-xs text-gray-500 dark:text-gray-400 ml-1">{{ product().previousPrice | copCurrency }}</del>
+        <p class="text-sm font-bold text-gray-900 dark:text-white">{{ product().price | copCurrency }}</p>
+        <del class="text-[10px] text-gray-500 dark:text-gray-400">{{ product().previousPrice | copCurrency }}</del>
       </div>
       <a
         [routerLink]="['products', product().productId]"
