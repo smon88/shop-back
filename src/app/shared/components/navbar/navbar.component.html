@@ -121,55 +121,54 @@
   }
 
   <!-- Mobile menu -->
-  <div
-    [class.translate-x-0]="isMenuOpen()"
-    [class.translate-x-full]="!isMenuOpen()"
-    [class.invisible]="!isMenuOpen()"
-    [class.visible]="isMenuOpen()"
-    class="fixed right-0 top-16 h-[calc(100vh-4rem)] w-64 bg-white dark:bg-slate-800 shadow-2xl z-50 md:hidden transition-transform duration-300 ease-in-out"
-  >
-    <nav class="flex flex-col h-full p-6 space-y-2">
-      <a
-        routerLink="/"
-        routerLinkActive="!bg-[#06cf86]/10 !text-[#06cf86] !font-semibold !border-l-4 !border-[#06cf86]"
-        [routerLinkActiveOptions]="{exact: true}"
-        (click)="closeMenu()"
-        class="flex items-center space-x-3 px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-[#06cf86] dark:hover:text-[#06cf86] transition-all duration-300"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-        </svg>
-        <span>Inicio</span>
-      </a>
-      <a
-        routerLink="/products"
-        routerLinkActive="!bg-[#06cf86]/10 !text-[#06cf86] !font-semibold !border-l-4 !border-[#06cf86]"
-        (click)="closeMenu()"
-        class="flex items-center space-x-3 px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-[#06cf86] dark:hover:text-[#06cf86] transition-all duration-300"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-        </svg>
-        <span>Productos</span>
-      </a>
-      <a
-        routerLink="/cart"
-        routerLinkActive="!bg-[#06cf86]/10 !text-[#06cf86] !font-semibold !border-l-4 !border-[#06cf86]"
-        (click)="closeMenu()"
-        class="flex items-center justify-between px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-[#06cf86] dark:hover:text-[#06cf86] transition-all duration-300"
-      >
-        <div class="flex items-center space-x-3">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 576 512">
-            <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
+  @if (isMenuOpen()) {
+    <div
+      class="fixed right-0 top-16 h-[calc(100vh-4rem)] w-64 bg-white dark:bg-slate-800 shadow-2xl z-50 md:hidden"
+      style="animation: slideInRight 0.3s ease-out"
+    >
+      <nav class="flex flex-col h-full p-6 space-y-2">
+        <a
+          routerLink="/"
+          routerLinkActive="!bg-[#06cf86]/10 !text-[#06cf86] !font-semibold !border-l-4 !border-[#06cf86]"
+          [routerLinkActiveOptions]="{exact: true}"
+          (click)="closeMenu()"
+          class="flex items-center space-x-3 px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-[#06cf86] dark:hover:text-[#06cf86] transition-all duration-300"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
           </svg>
-          <span>Carrito</span>
-        </div>
-        @if (cartItemsCount() > 0) {
-          <span class="flex h-6 w-6 items-center justify-center rounded-full bg-[#06cf86] text-xs font-bold text-white">
-            {{ cartItemsCount() > 9 ? '9+' : cartItemsCount() }}
-          </span>
-        }
-      </a>
-    </nav>
-  </div>
+          <span>Inicio</span>
+        </a>
+        <a
+          routerLink="/products"
+          routerLinkActive="!bg-[#06cf86]/10 !text-[#06cf86] !font-semibold !border-l-4 !border-[#06cf86]"
+          (click)="closeMenu()"
+          class="flex items-center space-x-3 px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-[#06cf86] dark:hover:text-[#06cf86] transition-all duration-300"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+          <span>Productos</span>
+        </a>
+        <a
+          routerLink="/cart"
+          routerLinkActive="!bg-[#06cf86]/10 !text-[#06cf86] !font-semibold !border-l-4 !border-[#06cf86]"
+          (click)="closeMenu()"
+          class="flex items-center justify-between px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-[#06cf86] dark:hover:text-[#06cf86] transition-all duration-300"
+        >
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 576 512">
+              <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
+            </svg>
+            <span>Carrito</span>
+          </div>
+          @if (cartItemsCount() > 0) {
+            <span class="flex h-6 w-6 items-center justify-center rounded-full bg-[#06cf86] text-xs font-bold text-white">
+              {{ cartItemsCount() > 9 ? '9+' : cartItemsCount() }}
+            </span>
+          }
+        </a>
+      </nav>
+    </div>
+  }
 </header>
